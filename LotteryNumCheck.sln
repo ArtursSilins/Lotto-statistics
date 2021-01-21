@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1267
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LotteryNumCheck", "LotteryNumCheck\LotteryNumCheck.csproj", "{B97154E3-3F22-4F57-B14C-4B4BB5CCFF85}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup2", "Setup2\Setup2.vdproj", "{ABE2F023-745C-4D5D-9446-28BBEBAC3704}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B97154E3-3F22-4F57-B14C-4B4BB5CCFF85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B97154E3-3F22-4F57-B14C-4B4BB5CCFF85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B97154E3-3F22-4F57-B14C-4B4BB5CCFF85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B97154E3-3F22-4F57-B14C-4B4BB5CCFF85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABE2F023-745C-4D5D-9446-28BBEBAC3704}.Debug|Any CPU.ActiveCfg = Debug
+		{ABE2F023-745C-4D5D-9446-28BBEBAC3704}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8D316BC6-D547-44BE-A577-F45A6465BE51}
+	EndGlobalSection
+EndGlobal

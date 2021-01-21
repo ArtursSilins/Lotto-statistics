@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="LotteryNumCheck.PopupBubble"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LotteryNumCheck"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="100">
+    <Grid Height="Auto">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Border Background="Black"
+                Grid.Row="1"
+                BorderThickness="0"
+                CornerRadius="10">
+            <TextBlock Text="{Binding PopupBubleText}"
+                       FontSize="15"
+                       Foreground="White"
+                       FontWeight="DemiBold"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center">
+            </TextBlock>
+        </Border>
+
+        <Polygon Points=" 0 8 , 7 0 , 15 8  "
+                 Margin="10 0 10 -0.5"
+                 Visibility="{Binding PopupTopVisibility}"
+                 HorizontalAlignment="{Binding PopupBubleTopPlacement}">
+            <Polygon.Fill>
+                <SolidColorBrush Color="Black"/>
+            </Polygon.Fill>
+        </Polygon>
+
+        <Polygon Grid.Row="2"
+                 Points=" 0 0 , 7 8 , 15 0  "
+                 Margin="10 -0.5 10 0"
+                 Visibility="{Binding PopupBottomVisibility}"
+                 HorizontalAlignment="{Binding PopupBubleBottomPlacement}">
+            <Polygon.Fill>
+                <SolidColorBrush Color="Black"/>
+            </Polygon.Fill>
+        </Polygon>
+        
+    </Grid>
+</UserControl>
