@@ -72,3 +72,4 @@ C:\Users\X\Source\Repos\LotteryNumCheck\LotteryNumCheck\obj\Release\LotteryNumCh
 C:\Users\X\Source\Repos\LotteryNumCheck\LotteryNumCheck\obj\Release\LotteryNumCheck.csproj.CopyComplete
 C:\Users\X\Source\Repos\LotteryNumCheck\LotteryNumCheck\obj\Release\LotteryNumCheck.exe
 C:\Users\X\Source\Repos\LotteryNumCheck\LotteryNumCheck\obj\Release\LotteryNumCheck.pdb
+C:\Users\X\Source\Repos\LotteryNumCheck\LotteryNumCheck\obj\Release\LotteryNumCheck.csprojAssemblyReference.cache

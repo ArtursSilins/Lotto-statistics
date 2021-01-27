@@ -41,7 +41,6 @@ namespace LotteryNumCheck
                 }
 
                 counter++;
-                //if (counter == results.Count()) progress.Report(10);
             }
 
             return vikingLottoNumbersCollection;

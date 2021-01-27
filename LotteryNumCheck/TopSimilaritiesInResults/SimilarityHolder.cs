@@ -11,11 +11,13 @@ namespace LotteryNumCheck
     {
         public static List<NumbersAndRepeats> NumberList { get; set; } = new List<NumbersAndRepeats>();
         public static List<NumbersAndRepeats> AlredyFoundNumberList { get; set; } 
-        private static bool hasMatch { get; set; }
+        private static bool IsMatch { get; set; }
+
         /// <summary>
         /// If it's first time you don't need to compare numbers to AlreadyFoundNumbersList. 
         /// </summary>
         public static bool FirstLoop { get; set; }
+
         /// <summary>
         /// Add new numbers if this number combination does not exist, or increment repeats++ if numbers combination already is in NumberList. 
         /// </summary>
@@ -25,13 +27,13 @@ namespace LotteryNumCheck
             // if no repeat in NumberList is found then in the last loop cicle number is added to NumberList 
             int notDuplicateCounter = 0;
 
-            hasMatch = false;
+            NumbersAndRepeats numbersAndRepeats = new NumbersAndRepeats();
 
-            if(NumberList == null) NumberList = new List<NumbersAndRepeats>();
+            IsMatch = false;
 
             if (NumberList.Count == 0)
             {
-                AddNewNum(numbers);
+                AddNewNum(numbers);    
             }
             else
             {
@@ -42,23 +44,27 @@ namespace LotteryNumCheck
                     int similarNumCounter = 0;
                     notDuplicateCounter++;
 
-                    var numbesExist = item.Numbers.All(numbers.Contains);
+                    var numbesExist = item.Numbers.All(numbers.Contains) && numbers.Count() == item.Numbers.Count(); 
 
                     if (numbesExist)
                     {
-                    
+
                         for (int num2 = 0; num2 < item.Numbers.Count; num2++)
                         {
-                            if (numbers.Count() == item.Numbers.Count()) 
-                                AddRepeatTimess(numbers, item, item.Numbers[num2], item.Numbers.Count, ref similarNumCounter);                         
+
+                            if (numbers.Count() == item.Numbers.Count())
+                            {
+                                AddRepeatTimess(numbers, item, item.Numbers[num2], item.Numbers.Count, ref similarNumCounter);
+                            }
+                                                       
                         }
 
                     }
-                    else if(notDuplicateCounter == NumberList.Count && hasMatch == false)
+                    else if(notDuplicateCounter == NumberList.Count && IsMatch == false)
                     {
                         AddNewNum(numbers);
                     }
-
+                   
                 }
             }                        
             
@@ -83,8 +89,8 @@ namespace LotteryNumCheck
                 }
 
                 if (similarNumCounter == num2Count)
-                {                  
-                    hasMatch = true;
+                {
+                    IsMatch = true;
                     numbersAndRepeats.Repeat++;
                 }
 
@@ -172,21 +178,25 @@ namespace LotteryNumCheck
 
             }
 
-            foreach (var item in GetAllCobinations(numbers))
+            if (counterForBool > 1)
             {
-                if (counterForBool >= similarityCount)
+                foreach (var item in GetAllCobinations(numbers))
                 {
-                    if (!SimilarityHolder.CheckIfNumberExist(item))
+                    if (item.Count >= similarityCount)
                     {
-                        SimilarityHolder.AddNumbers(item);
+                        if (!SimilarityHolder.CheckIfNumberExist(item))
+                        {
+                            SimilarityHolder.AddNumbers(item);
+                        }
                     }
                 }
             }
-          
+                     
         }
 
         private static List<List<int>> GetAllCobinations(List<int> numbers)
-        {
+        {                     
+            
             List<List<int>> combinationsList = new List<List<int>>();
 
             double count = Math.Pow(2, numbers.Count);
@@ -212,36 +222,49 @@ namespace LotteryNumCheck
 
             return combinationsList;
         }
-             
+        /// <summary>
+        /// Compare each draw results to each draw results
+        /// </summary>
+        /// <param name="allNumbers"></param>
+        /// <param name="similarityCount"></param>
+        /// <param name="minRepeats"></param>
+        /// <returns></returns>
         public static ObservableCollection<SimilarityHolderViewModel> FindBestNumbers(ObservableCollection<VikingLottoNumbers> allNumbers, int similarityCount, int minRepeats)
-        {
-            // detection to don't compare number to it self
-            int RowCount1 = 0;
-            int RowCount2 = 0;
+        {    
+            
+            Task<ObservableCollection<SimilarityHolderViewModel>> task = Task<ObservableCollection<SimilarityHolderViewModel>>.Factory.StartNew(() => {
 
-            foreach (var lotteryTicketNumbers in allNumbers)
-            {
-                foreach (var vikingLottoNumbers in allNumbers)
+                // detection to not compare the number to itself
+                int RowCount1 = 0;
+                int RowCount2 = 0;
+                //
+
+                foreach (var lotteryTicketNumbers in allNumbers)
                 {
-                    if (RowCount1 != RowCount2)
-                        CheckSimilarities(lotteryTicketNumbers, vikingLottoNumbers, similarityCount);
-
-                    RowCount2++;
-                    if (RowCount2 == allNumbers.Count)
+                    foreach (var vikingLottoNumbers in allNumbers)
                     {
-                        RowCount2 = 0;
+                        if (RowCount1 != RowCount2)
+                            CheckSimilarities(lotteryTicketNumbers, vikingLottoNumbers, similarityCount);
+
+                        RowCount2++;
+                        if (RowCount2 == allNumbers.Count)
+                        {
+                            RowCount2 = 0;
+                        }
                     }
+
+                    SimilarityHolder.FirstLoop = false;
+
+                    SimilarityHolder.AddToAlreadyFoundList(SimilarityHolder.NumberList);
+
+                    RowCount1++;
+
                 }
 
-                SimilarityHolder.FirstLoop = false;
+               return AddToSimilarityHolderViews(minRepeats);
+            });
 
-                SimilarityHolder.AddToAlreadyFoundList(SimilarityHolder.NumberList);
-             
-                RowCount1++;
-
-            }
-
-           return AddToSimilarityHolderViews(minRepeats);
+            return task.Result;
         }
 
         private static ObservableCollection<SimilarityHolderViewModel> AddToSimilarityHolderViews(int minRepeats)
@@ -296,8 +319,8 @@ namespace LotteryNumCheck
             }
 
             return new ObservableCollection<SimilarityHolderViewModel>(SimilarityHolderViews.OrderByDescending(x => x.Repeats));
+
         }
 
-     
     }
 }

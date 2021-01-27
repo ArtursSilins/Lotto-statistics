@@ -837,15 +837,12 @@ namespace LotteryNumCheck
         {
             lottoTask = await vikingLottoNumbers;
 
-
             ///////////// Free LiveChatr version (Bad performance)!!! //////////////
             ///
             //SeriesCollection = await LiveChart.FindFrekvences(lottoTask);
             ////////////////////////
 
-
             AddLastWinNumbers(lottoTask, progress);
-
 
             AddTopNumbersToColumns(lottoTask, progress);
             
