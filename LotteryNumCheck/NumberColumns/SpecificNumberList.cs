@@ -11,6 +11,11 @@ namespace LotteryNumCheck
     {
         public ObservableCollection<SpecificNumberAndRepeat> SpecificNumberAndRepeats { get; set; }
 
+        public SpecificNumberList()
+        {
+          
+        }
+
         public SpecificNumberList(List<SpecificNumberAndRepeat> list)
         {
             SpecificNumberAndRepeats = new ObservableCollection<SpecificNumberAndRepeat>();
@@ -24,8 +29,9 @@ namespace LotteryNumCheck
                 SpecificNumberAndRepeats.Add(specificNumberAndRepeat);
             }
         }
-        public void AddColourToNumber(ObservableCollection<VikingLottoNumbers> lottoTask, ObservableCollection<SpecificNumberAndRepeat> NumList,
-            int num1, int num2, int num3, int num4, int num5, int num6, int num7, int num8, int num9, IProgress<int> progress)
+
+        public void AddColourToAdditionalNum(ObservableCollection<VikingLottoNumbers> lottoTask, ObservableCollection<SpecificNumberAndRepeat> NumList,
+             IProgress<int> progress)
         {
             bool colourSet = false;
 
@@ -33,56 +39,39 @@ namespace LotteryNumCheck
 
             foreach (var item in NumList)
             {
+                               
 
-                if (item.Number == num1)
+                if (item.Number == lottoTask[0].AdditionalNum)
                 {
                     colourSet = true;
                     item.Colour = "#0f3e0f";
                     item.NumberColour = "White";
                 }
-                else if (item.Number == num2 && !colourSet)
+                else if (item.Number == lottoTask[1].AdditionalNum && !colourSet)
                 {
                     colourSet = true;
                     item.Colour = "#145214";
                     item.NumberColour = "White";
                 }
-                else if (item.Number == num3 && !colourSet)
+                else if (item.Number == lottoTask[2].AdditionalNum && !colourSet)
                 {
                     colourSet = true;
                     item.Colour = "#196719";
                     item.NumberColour = "White";
                 }
-                else if (item.Number == num4 && !colourSet)
-                {
-                    colourSet = true;
-                    item.Colour = "#1e7b1e";
-                    item.NumberColour = "White";
-                }
-                else if (item.Number == num5 && !colourSet)
+                else if (item.Number == lottoTask[3].AdditionalNum && !colourSet)
                 {
                     colourSet = true;
                     item.Colour = "#239023";
                     item.NumberColour = "White";
                 }
-                else if (item.Number == num6 && !colourSet)
-                {
-                    colourSet = true;
-                    item.Colour = "#28a428";
-                    item.NumberColour = "White";
-                }
-                else if (item.Number == num7 && !colourSet)
+                else if (item.Number == lottoTask[4].AdditionalNum && !colourSet)
                 {
                     colourSet = true;
                     item.Colour = "#2db92d";
                     item.NumberColour = "White";
                 }
-                else if (item.Number == num8 && !colourSet)
-                {
-                    colourSet = true;
-                    item.Colour = "#32cd32";
-                    item.NumberColour = "White";
-                }
-                else if (item.Number == num9 && !colourSet)
+                else if (item.Number == lottoTask[5].AdditionalNum && !colourSet)
                 {
                     colourSet = true;
                     item.Colour = "#46d246";
@@ -97,10 +86,133 @@ namespace LotteryNumCheck
                 colourSet = false;
 
                 count++;
-                if(count == NumList.Count) progress.Report(10);
+                if (count == NumList.Count) progress.Report(10);
 
             }
-            
+
+        }
+        /// <summary>
+        /// Search for specific number at specific collection index
+        /// </summary>
+        /// <param name="num"></param>
+        /// <param name="drawIndex"></param>
+        /// <param name="lottoTask"></param>
+        /// <returns></returns>
+        private bool SerchNum(int num, int drawIndex, ObservableCollection<VikingLottoNumbers> lottoTask)
+        {
+            bool equal = false;
+
+            foreach (var item in lottoTask[drawIndex].NumCollection)
+            {
+                if (item == num) return equal = true;
+            }
+
+            return equal;
+        }
+
+        public async Task<ObservableCollection<SpecificNumberAndRepeat>> AddTopNumbersToColumns(ObservableCollection<VikingLottoNumbers> lottoTask, int num, IProgress<int> progress)
+        {
+
+           return await Task.Run(() => NewMethod(lottoTask, num, progress));
+
+        }
+
+        private ObservableCollection<SpecificNumberAndRepeat> NewMethod(ObservableCollection<VikingLottoNumbers> lottoTask, int num, IProgress<int> progress)
+        {
+            ObservableCollection<SpecificNumberAndRepeat> numList = new ObservableCollection<SpecificNumberAndRepeat>();
+
+            List<SpecificNumberAndRepeat> num1Duplicates = lottoTask.GroupBy(x => x.GetNum(num))
+                      .Where(x => x.Count() > 1)
+                      .Select(x => new SpecificNumberAndRepeat { Number = x.Key, Repeat = x.Count() }).OrderByDescending(x => x.Repeat)
+                      .ToList();
+
+
+            SpecificNumberList specificNumberList1 = new SpecificNumberList(num1Duplicates);
+            numList = specificNumberList1.SpecificNumberAndRepeats;
+
+            if(num==7)
+                specificNumberList1.AddColourToAdditionalNum(lottoTask, numList, progress);
+            else
+                specificNumberList1.ColourToNumber(lottoTask, numList, progress);
+
+            return numList;
+        }
+       
+        public void ColourToNumber(ObservableCollection<VikingLottoNumbers> lottoTask, ObservableCollection<SpecificNumberAndRepeat> NumList,
+           IProgress<int> progress)
+        {
+            bool colourSet = false;
+
+            int count = 0;
+
+
+            List<int> last2DrowDuplicates = new List<int>();
+
+            foreach (var item in lottoTask[0].NumCollection)
+            {
+                foreach (var item2 in lottoTask[1].NumCollection)
+                {
+                    if (item == item2) last2DrowDuplicates.Add(item);
+                }
+            }
+
+            foreach (var item in NumList)
+            {
+
+                if (last2DrowDuplicates.Contains(item.Number))
+                    item.SecondAppearance = "IndianRed";
+                else
+                    item.SecondAppearance = "Transparent";
+
+                if (SerchNum(item.Number, 0, lottoTask))
+                {
+                    colourSet = true;
+                    item.Colour = "#0f3e0f";
+                    item.NumberColour = "White";
+                }
+                else if (!colourSet && SerchNum(item.Number, 1, lottoTask))
+                {
+                    colourSet = true;
+                    item.Colour = "#145214";
+                    item.NumberColour = "White";
+                }
+                else if (!colourSet && SerchNum(item.Number, 2, lottoTask))
+                {
+                    colourSet = true;
+                    item.Colour = "#196719";
+                    item.NumberColour = "White";
+                }
+                else if (!colourSet && SerchNum(item.Number, 3, lottoTask))
+                {
+                    colourSet = true;
+                    item.Colour = "#239023";
+                    item.NumberColour = "White";
+                }
+                else if (!colourSet && SerchNum(item.Number, 4, lottoTask))
+                {
+                    colourSet = true;
+                    item.Colour = "#2db92d";
+                    item.NumberColour = "White";
+                }
+                else if (!colourSet && SerchNum(item.Number, 5, lottoTask))
+                {
+                    colourSet = true;
+                    item.Colour = "#46d246";
+                    item.NumberColour = "White";
+                }
+                else
+                {
+                    item.Colour = "White";
+                    item.NumberColour = "Black";
+                }
+
+                colourSet = false;
+
+                count++;
+                if (count == NumList.Count) progress.Report(10);
+
+            }
+
         }
     }
 }

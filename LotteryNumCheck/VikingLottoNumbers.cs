@@ -71,5 +71,36 @@ namespace LotteryNumCheck
                 colorCounter++;
             }
         }
+        public int GetNum(int num)
+        {
+            int number = 0;
+
+            switch (num)
+            {
+                case 1:
+                    number = Num1;
+                    break;
+                case 2:
+                    number = Num2;
+                    break;
+                case 3:
+                    number = Num3;
+                    break;
+                case 4:
+                    number = Num4;
+                    break;
+                case 5:
+                    number = Num5;
+                    break;
+                case 6:
+                    number = Num6;
+                    break;
+                case 7:
+                    number = AdditionalNum;
+                    break;
+            }
+
+            return number;
+        }
     }
 }

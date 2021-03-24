@@ -99,17 +99,17 @@ namespace LotteryNumCheck
                     winNumbersList.ColorNum6 = "#196719";
                     winNumbersList.ColorAdditionalNum = "#196719";
                 }
+                //else if (counter == 3)
+                //{
+                //    winNumbersList.ColorNum1 = "#1e7b1e";
+                //    winNumbersList.ColorNum2 = "#1e7b1e";
+                //    winNumbersList.ColorNum3 = "#1e7b1e";
+                //    winNumbersList.ColorNum4 = "#1e7b1e";
+                //    winNumbersList.ColorNum5 = "#1e7b1e";
+                //    winNumbersList.ColorNum6 = "#1e7b1e";
+                //    winNumbersList.ColorAdditionalNum = "#1e7b1e";
+                //}
                 else if (counter == 3)
-                {
-                    winNumbersList.ColorNum1 = "#1e7b1e";
-                    winNumbersList.ColorNum2 = "#1e7b1e";
-                    winNumbersList.ColorNum3 = "#1e7b1e";
-                    winNumbersList.ColorNum4 = "#1e7b1e";
-                    winNumbersList.ColorNum5 = "#1e7b1e";
-                    winNumbersList.ColorNum6 = "#1e7b1e";
-                    winNumbersList.ColorAdditionalNum = "#1e7b1e";
-                }
-                else if (counter == 4)
                 {
                     winNumbersList.ColorNum1 = "#239023";
                     winNumbersList.ColorNum2 = "#239023";
@@ -119,17 +119,17 @@ namespace LotteryNumCheck
                     winNumbersList.ColorNum6 = "#239023";
                     winNumbersList.ColorAdditionalNum = "#239023";
                 }
-                else if (counter == 5)
-                {
-                    winNumbersList.ColorNum1 = "#28a428";
-                    winNumbersList.ColorNum2 = "#28a428";
-                    winNumbersList.ColorNum3 = "#28a428";
-                    winNumbersList.ColorNum4 = "#28a428";
-                    winNumbersList.ColorNum5 = "#28a428";
-                    winNumbersList.ColorNum6 = "#28a428";
-                    winNumbersList.ColorAdditionalNum = "#28a428";
-                }
-                else if (counter == 6)
+                //else if (counter == 5)
+                //{
+                //    winNumbersList.ColorNum1 = "#28a428";
+                //    winNumbersList.ColorNum2 = "#28a428";
+                //    winNumbersList.ColorNum3 = "#28a428";
+                //    winNumbersList.ColorNum4 = "#28a428";
+                //    winNumbersList.ColorNum5 = "#28a428";
+                //    winNumbersList.ColorNum6 = "#28a428";
+                //    winNumbersList.ColorAdditionalNum = "#28a428";
+                //}
+                else if (counter == 4)
                 {
                     winNumbersList.ColorNum1 = "#2db92d";
                     winNumbersList.ColorNum2 = "#2db92d";
@@ -139,17 +139,17 @@ namespace LotteryNumCheck
                     winNumbersList.ColorNum6 = "#2db92d";
                     winNumbersList.ColorAdditionalNum = "#2db92d";
                 }
-                else if (counter == 7)
-                {
-                    winNumbersList.ColorNum1 = "#32cd32";
-                    winNumbersList.ColorNum2 = "#32cd32";
-                    winNumbersList.ColorNum3 = "#32cd32";
-                    winNumbersList.ColorNum4 = "#32cd32";
-                    winNumbersList.ColorNum5 = "#32cd32";
-                    winNumbersList.ColorNum6 = "#32cd32";
-                    winNumbersList.ColorAdditionalNum = "#32cd32";
-                }
-                else if (counter == 8)
+                //else if (counter == 7)
+                //{
+                //    winNumbersList.ColorNum1 = "#32cd32";
+                //    winNumbersList.ColorNum2 = "#32cd32";
+                //    winNumbersList.ColorNum3 = "#32cd32";
+                //    winNumbersList.ColorNum4 = "#32cd32";
+                //    winNumbersList.ColorNum5 = "#32cd32";
+                //    winNumbersList.ColorNum6 = "#32cd32";
+                //    winNumbersList.ColorAdditionalNum = "#32cd32";
+                //}
+                else if (counter == 5)
                 {
                     winNumbersList.ColorNum1 = "#46d246";
                     winNumbersList.ColorNum2 = "#46d246";

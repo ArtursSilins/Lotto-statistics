@@ -5,6 +5,7 @@ using LotteryNumCheck.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -616,6 +617,34 @@ namespace LotteryNumCheck
             }
         }
 
+        private ObservableCollection<DrawSequenceVisualList> sequenceVisualList;
+
+        public ObservableCollection<DrawSequenceVisualList> SequenceVisualList
+        {
+            get
+            {
+                return sequenceVisualList;
+            }
+            set
+            {
+                sequenceVisualList = value;
+                OnPropertyChanged(nameof(SequenceVisualList));
+            }
+        }
+
+        private string drawVisual;
+
+        public string DrawVisual
+        {
+            get { return drawVisual; }
+            set
+            {
+                drawVisual = value;
+                OnPropertyChanged(nameof(DrawVisual));
+            }
+        }
+
+
         private ObservableCollection<VikingLottoNumbers> lottoTask { get; set; }
 
         private static DispatcherTimer Timer { get; set; }
@@ -623,7 +652,7 @@ namespace LotteryNumCheck
         public LotteryViewModel()
         {
             EnableButton = false;
-            
+
             CloasePopupBuble = "Hidden";
             TopSimilaritiesPopupBuble = "Hidden";
             MinimizePopupBuble = "Hidden";
@@ -837,15 +866,59 @@ namespace LotteryNumCheck
         {
             lottoTask = await vikingLottoNumbers;
 
-            ///////////// Free LiveChatr version (Bad performance)!!! //////////////
-            ///
-            //SeriesCollection = await LiveChart.FindFrekvences(lottoTask);
-            ////////////////////////
+            PrintAverage(lottoTask);
+            /////////////// Free LiveChatr version (Bad performance)!!! //////////////
+            /////
+            ////SeriesCollection = await LiveChart.FindFrekvences(lottoTask);
+            //////////////////////////
 
             AddLastWinNumbers(lottoTask, progress);
 
-            AddTopNumbersToColumns(lottoTask, progress);
-            
+            List<Task<ObservableCollection<SpecificNumberAndRepeat>>> numbersAndRepeatTask = new List<Task<ObservableCollection<SpecificNumberAndRepeat>>>();
+
+            int Counter = 1;
+
+            while (Counter < 8)
+            {
+                SpecificNumberList specificNumberList = new SpecificNumberList();
+                numbersAndRepeatTask.Add(specificNumberList.AddTopNumbersToColumns(lottoTask, Counter, progress));
+
+                Counter++;
+            }
+
+            var result = await Task.WhenAll(numbersAndRepeatTask);
+
+            int count = 0;
+
+            foreach (var item in result)
+            {
+                switch (count)
+                {
+                    case 0:
+                        Num1List = item;
+                        break;
+                    case 1:
+                        Num2List = item;
+                        break;
+                    case 2:
+                        Num3List = item;
+                        break;
+                    case 3:
+                        Num4List = item;
+                        break;
+                    case 4:
+                        Num5List = item;
+                        break;
+                    case 5:
+                        Num6List = item;
+                        break;
+                    case 6:
+                        AdditionalNumList = item;
+                        break;
+                }
+                count++;
+            }
+
             SimilarityHolderViews = SimilarityHolder.FindBestNumbers(lottoTask, 2, 5);
 
             WinResultList = await WinNumbersList.PopulateWinResultList(lottoTask, WinResultList, progress);
@@ -855,177 +928,98 @@ namespace LotteryNumCheck
             return lottoTask;
         }
 
-        /// <summary>
-        /// For each lotto number add column with most dropped digits by descend.
-        /// </summary>
-        /// <param name="lottoTask"></param>
-        private void AddTopNumbersToColumns(ObservableCollection<VikingLottoNumbers> lottoTask, IProgress<int> progress)
+        private void PrintAverage(ObservableCollection<VikingLottoNumbers> lottoTask)
         {
-          
-            Task.Run(() =>
+            int[] numbers = new int[48];
+
+            int indexCounter = 0;
+            int numberCounter = 1;
+            int apearanceCounter = 0;
+
+            //int drowCount = 0;
+
+            string text = "";
+
+            while (indexCounter <numbers.Length)
             {
-                List<SpecificNumberAndRepeat> num1Duplicates = lottoTask.GroupBy(x => x.Num1)
-                          .Where(x => x.Count() > 1)
-                          .Select(x => new SpecificNumberAndRepeat { Number = x.Key, Repeat = x.Count() }).OrderByDescending(x => x.Repeat)
-                          .ToList();
-            
-            
-                SpecificNumberList specificNumberList1 = new SpecificNumberList(num1Duplicates);
-                Num1List = specificNumberList1.SpecificNumberAndRepeats;
+                numbers[indexCounter] = numberCounter;
 
-                specificNumberList1.AddColourToNumber(lottoTask, Num1List,
-                    lottoTask[0].Num1,
-                    lottoTask[1].Num1,
-                    lottoTask[2].Num1,
-                    lottoTask[3].Num1,
-                    lottoTask[4].Num1,
-                    lottoTask[5].Num1,
-                    lottoTask[6].Num1,
-                    lottoTask[7].Num1,
-                    lottoTask[8].Num1, progress); 
+                indexCounter++;
+                numberCounter++;
             }
-            );
 
-            Task.Run(() =>
+            foreach (var num in numbers)
             {
-                List<SpecificNumberAndRepeat> num2Duplicates = lottoTask.GroupBy(x => x.Num2)
-                     .Where(x => x.Count() > 1)
-                     .Select(x => new SpecificNumberAndRepeat { Number = x.Key, Repeat = x.Count() }).OrderByDescending(x => x.Repeat)
-                     .ToList();
+                //drowCount = 0;
 
-            SpecificNumberList specificNumberList2 = new SpecificNumberList(num2Duplicates);
-            Num2List = specificNumberList2.SpecificNumberAndRepeats;
-
-            specificNumberList2.AddColourToNumber(lottoTask, Num2List,
-                lottoTask[0].Num2,
-                lottoTask[1].Num2,
-                lottoTask[2].Num2,
-                lottoTask[3].Num2,
-                lottoTask[4].Num2,
-                lottoTask[5].Num2,
-                lottoTask[6].Num2,
-                lottoTask[7].Num2,
-                lottoTask[8].Num2, progress);
-            }
-            );
-
-
-            Task.Run(() =>
-            {
-                List<SpecificNumberAndRepeat> num3Duplicates = lottoTask.GroupBy(x => x.Num3)
-                        .Where(x => x.Count() > 1)
-                        .Select(x => new SpecificNumberAndRepeat { Number = x.Key, Repeat = x.Count() }).OrderByDescending(x => x.Repeat)
-                        .ToList();
-
-                SpecificNumberList specificNumberList3 = new SpecificNumberList(num3Duplicates);
-                Num3List = specificNumberList3.SpecificNumberAndRepeats;
-
-                specificNumberList3.AddColourToNumber(lottoTask, Num3List,
-                    lottoTask[0].Num3,
-                    lottoTask[1].Num3,
-                    lottoTask[2].Num3,
-                    lottoTask[3].Num3,
-                    lottoTask[4].Num3,
-                    lottoTask[5].Num3,
-                    lottoTask[6].Num3,
-                    lottoTask[7].Num3,
-                    lottoTask[8].Num3, progress);
-            }
-            );
-
-            Task.Run(() =>
-            {
-                List<SpecificNumberAndRepeat> num4Duplicates = lottoTask.GroupBy(x => x.Num4)
-                    .Where(x => x.Count() > 1)
-                    .Select(x => new SpecificNumberAndRepeat { Number = x.Key, Repeat = x.Count() }).OrderByDescending(x => x.Repeat)
-                    .ToList();
-
-            SpecificNumberList specificNumberList4 = new SpecificNumberList(num4Duplicates);
-            Num4List = specificNumberList4.SpecificNumberAndRepeats;
-
-            specificNumberList4.AddColourToNumber(lottoTask, Num4List,
-                lottoTask[0].Num4,
-                lottoTask[1].Num4,
-                lottoTask[2].Num4,
-                lottoTask[3].Num4,
-                lottoTask[4].Num4,
-                lottoTask[5].Num4,
-                lottoTask[6].Num4,
-                lottoTask[7].Num4,
-                lottoTask[8].Num4, progress);
-            }
-            );
-
-            Task.Run(() =>
-            {
-                List<SpecificNumberAndRepeat> num5Duplicates = lottoTask.GroupBy(x => x.Num5)
-                    .Where(x => x.Count() > 1)
-                    .Select(x => new SpecificNumberAndRepeat { Number = x.Key, Repeat = x.Count() }).OrderByDescending(x => x.Repeat)
-                    .ToList();
-
-            SpecificNumberList specificNumberList5 = new SpecificNumberList(num5Duplicates);
-            Num5List = specificNumberList5.SpecificNumberAndRepeats;
-
-            specificNumberList5.AddColourToNumber(lottoTask, Num5List,
-                lottoTask[0].Num5,
-                lottoTask[1].Num5,
-                lottoTask[2].Num5,
-                lottoTask[3].Num5,
-                lottoTask[4].Num5,
-                lottoTask[5].Num5,
-                lottoTask[6].Num5,
-                lottoTask[7].Num5,
-                lottoTask[8].Num5, progress);
-            }
-            );
-
-            Task.Run(() =>
+                foreach (var item in lottoTask)
                 {
-                    List<SpecificNumberAndRepeat> num6Duplicates = lottoTask.GroupBy(x => x.Num6)
-                    .Where(x => x.Count() > 1)
-                    .Select(x => new SpecificNumberAndRepeat { Number = x.Key, Repeat = x.Count() }).OrderByDescending(x => x.Repeat)
-                    .ToList();
+                    if (item.NumCollection.Contains(num))
+                    {
+                        if (num < 10)
+                        {
+                            text += num.ToString()+" ";
+                            apearanceCounter++;
+                        }
+                        else
+                        {
+                            text += num.ToString();
+                            apearanceCounter++;
+                        }
+                       
 
-            SpecificNumberList specificNumberList6 = new SpecificNumberList(num6Duplicates);
-            Num6List = specificNumberList6.SpecificNumberAndRepeats;
-
-            specificNumberList6.AddColourToNumber(lottoTask, Num6List,
-                lottoTask[0].Num6,
-                lottoTask[1].Num6,
-                lottoTask[2].Num6,
-                lottoTask[3].Num6,
-                lottoTask[4].Num6,
-                lottoTask[5].Num6,
-                lottoTask[6].Num6,
-                lottoTask[7].Num6,
-                lottoTask[8].Num6, progress);
+                        //text += " [" + drowCount + "] ";
+                        //drawCount = 0;
+                    }
+                    else
+                    {
+                        text += "-";
+                    }
+                    //drowCount++;
                 }
-            );
+                
+                text += " Average: " + (Convert.ToDouble(lottoTask.Count) / Convert.ToDouble(apearanceCounter)).ToString("0.00") + Environment.NewLine/* + Environment.NewLine*/;
 
-            Task.Run(() =>
-            {
-                List<SpecificNumberAndRepeat> additionalNumDuplicates = lottoTask.GroupBy(x => x.AdditionalNum)
-                   .Where(x => x.Count() > 1)
-                   .Select(x => new SpecificNumberAndRepeat { Number = x.Key, Repeat = x.Count() }).OrderByDescending(x => x.Repeat)
-                   .ToList();
-
-            SpecificNumberList specificAdditionalNumberList = new SpecificNumberList(additionalNumDuplicates);
-            AdditionalNumList = specificAdditionalNumberList.SpecificNumberAndRepeats;
-
-            specificAdditionalNumberList.AddColourToNumber(lottoTask, AdditionalNumList,
-                lottoTask[0].AdditionalNum,
-                lottoTask[1].AdditionalNum,
-                lottoTask[2].AdditionalNum,
-                lottoTask[3].AdditionalNum,
-                lottoTask[4].AdditionalNum,
-                lottoTask[5].AdditionalNum,
-                lottoTask[6].AdditionalNum,
-                lottoTask[7].AdditionalNum,
-                lottoTask[8].AdditionalNum, progress);
+                apearanceCounter = 0;
             }
-            );
+
+            text += Environment.NewLine + " Total Times "+ lottoTask.Count.ToString();
+
+            foreach (var item in lottoTask)
+            {
+                int summ = 0;
+
+                foreach (var num in item.NumCollection)
+                {
+                    summ += num;
+                }
+
+                text += Environment.NewLine;
+
+                text += summ.ToString() + Environment.NewLine;
+
+            }
+
+            DrawVisual = text;
+
+            DrawNumber drawNumber = new DrawNumber();
+            drawNumber.Num = 1;
+
+            DrawNumber drawNumber1 = new DrawNumber();
+            drawNumber1.Num = 1;
+
+            DrawSequenceVisualList sequenceVisualList1 = new DrawSequenceVisualList();
+
+            sequenceVisualList1.NumList = new List<DrawNumber>(); 
+
+            sequenceVisualList1.NumList.Add(drawNumber);
+            sequenceVisualList1.NumList.Add(drawNumber1);
+
+            SequenceVisualList = new ObservableCollection<DrawSequenceVisualList>();
+            SequenceVisualList.Add(sequenceVisualList1);
+
+            File.WriteAllText(@"C:\Users\X\Desktop\Average.txt", text);
         }
-              
-                      
+     
     }
 }

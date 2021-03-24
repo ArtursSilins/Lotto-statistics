@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\X\Source\Repos\LotteryNumCheck\LotteryNumCheck\App.xaml
-15423602479
+181762551535
 
-371858838646
+421354127823
 20-973288113
-AdditionalNumResultList.xaml;AllResultList.xaml;Chart.xaml;MainWindow.xaml;Num1ResultList.xaml;Num2ResultList.xaml;Num3ResultList.xaml;Num4ResultList.xaml;Num5ResultList.xaml;Num6ResultList.xaml;PopupBubble.xaml;Resources.xaml;Results.xaml;TopSimilarities.xaml;TopSimilaritiesList.xaml;
+AdditionalNumResultList.xaml;AllResultList.xaml;Chart.xaml;DrawSequenceItem.xaml;DrawSequenceVisual.xaml;DrawSequenceVisualItems.xaml;MainWindow.xaml;Num1ResultList.xaml;Num2ResultList.xaml;Num3ResultList.xaml;Num4ResultList.xaml;Num5ResultList.xaml;Num6ResultList.xaml;PopupBubble.xaml;Resources.xaml;Results.xaml;TopSimilarities.xaml;TopSimilaritiesList.xaml;
 
 False
 

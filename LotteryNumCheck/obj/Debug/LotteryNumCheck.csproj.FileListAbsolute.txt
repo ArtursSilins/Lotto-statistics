@@ -72,4 +72,10 @@ C:\Users\X\Source\Repos\LotteryNumCheck\LotteryNumCheck\bin\Debug\LiveCharts.Wpf
 C:\Users\X\Source\Repos\LotteryNumCheck\LotteryNumCheck\bin\Debug\LiveCharts.Wpf.xml
 C:\Users\X\Source\Repos\LotteryNumCheck\LotteryNumCheck\obj\Debug\PopupBubble.g.cs
 C:\Users\X\Source\Repos\LotteryNumCheck\LotteryNumCheck\obj\Debug\PopupBubble.baml
+C:\Users\X\Source\Repos\LotteryNumCheck\LotteryNumCheck\obj\Debug\DrawSequenceVisual.g.cs
+C:\Users\X\Source\Repos\LotteryNumCheck\LotteryNumCheck\obj\Debug\DrawSequenceVisualItems.g.cs
+C:\Users\X\Source\Repos\LotteryNumCheck\LotteryNumCheck\obj\Debug\DrawSequenceVisual.baml
+C:\Users\X\Source\Repos\LotteryNumCheck\LotteryNumCheck\obj\Debug\DrawSequenceVisualItems.baml
+C:\Users\X\Source\Repos\LotteryNumCheck\LotteryNumCheck\obj\Debug\DrawSequenceItem.g.cs
+C:\Users\X\Source\Repos\LotteryNumCheck\LotteryNumCheck\obj\Debug\DrawSequenceItem.baml
 C:\Users\X\Source\Repos\LotteryNumCheck\LotteryNumCheck\obj\Debug\LotteryNumCheck.csprojAssemblyReference.cache

@@ -8,9 +8,9 @@
         mc:Ignorable="d"
         Title="Lotto Statistic"
         Height="1000"
-        Width="1505"
+        Width="2000"
         Background="#FF1F893C"
-        WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" >
+        WindowStartupLocation="CenterScreen" WindowStyle="None" WindowState="Maximized" ResizeMode="NoResize" >
 
     <Window.Resources>
         <ResourceDictionary>
@@ -20,14 +20,14 @@
 
             <Storyboard x:Key="AnimatedTopSimilarities">
                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="topSimilaritiesList">
-                    <EasingDoubleKeyFrame KeyTime="0" Value="406"/>
+                    <EasingDoubleKeyFrame KeyTime="0" Value="2000"/>
                     <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
                 </DoubleAnimationUsingKeyFrames>
             </Storyboard>
             <Storyboard x:Key="AnimationTopSimilaritiesOff">
                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="topSimilaritiesList">
                     <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="406"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="2000"/>
                 </DoubleAnimationUsingKeyFrames>
             </Storyboard>
 
@@ -143,10 +143,11 @@
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="405"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
 
-        <Grid Grid.ColumnSpan="9"
+        <Grid Grid.ColumnSpan="10"
               Background="#FF549797" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
 
             <Grid.ColumnDefinitions>
@@ -157,7 +158,7 @@
 
             <Label HorizontalAlignment="Center"
                    VerticalAlignment="Center"
-                   Content="Viking Lotto Statistic"
+                   Content="Viking Lotto Statistics"
                    FontSize="25"
                    Padding="-1"
                    FontWeight="DemiBold"
@@ -406,47 +407,6 @@ Find a match with your number
                     IsEnabled="{Binding EnableButton}"                    
                     Command="{Binding FindMatch}" >
 
-                <Image x:Name="SerchImage" Source="Images/Lotto serch icon 96dpi (Grey).png" />
-
-                <Button.Triggers>
-
-                    <EventTrigger RoutedEvent="Button.MouseEnter">
-                        <BeginStoryboard >
-                            <Storyboard BeginTime="00:00:00" >
-                                
-                                <ObjectAnimationUsingKeyFrames  Storyboard.TargetName="SerchImage"
-                                                                Storyboard.TargetProperty="(Image.Source)">
-                                    <DiscreteObjectKeyFrame KeyTime="00:00:00">
-                                        <DiscreteObjectKeyFrame.Value>
-                                            <BitmapImage UriSource="Images/Lotto serch icon 96dpi (Green).png" />
-                                        </DiscreteObjectKeyFrame.Value>
-                                    </DiscreteObjectKeyFrame>
-                                  
-                                </ObjectAnimationUsingKeyFrames>
-
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-
-                    <EventTrigger RoutedEvent="Button.MouseLeave">
-                        <BeginStoryboard>
-                            <Storyboard BeginTime="00:00:00" >
-                                <ObjectAnimationUsingKeyFrames 
-                                                              BeginTime="00:00:00" 
-                                                              Storyboard.TargetName="SerchImage"
-                                                              Storyboard.TargetProperty="(Image.Source)">
-                                    <DiscreteObjectKeyFrame KeyTime="00:00:00">
-                                        <DiscreteObjectKeyFrame.Value>
-                                            <BitmapImage UriSource="Images/Lotto serch icon 96dpi (Grey).png" />
-                                        </DiscreteObjectKeyFrame.Value>
-                                    </DiscreteObjectKeyFrame>
-                                </ObjectAnimationUsingKeyFrames>
-
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </Button.Triggers>
-
                 <Button.Style >
 
                     <Style TargetType="{x:Type Button}">
@@ -455,12 +415,21 @@ Find a match with your number
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type Button}">
                                     <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="0">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Grid>
+                                            <Image x:Name="SerchImage" Source="Images/Lotto serch icon 96dpi (Grey).png" />
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter Property="BorderThickness" TargetName="border" Value="0 0 0 2"/>
                                             <Setter Property="BorderBrush" TargetName="border" Value="Red"/>
+                                            <Setter Property="Source" TargetName="SerchImage" Value="Images/Lotto serch icon 96dpi (Green).png"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="BorderThickness" TargetName="border" Value="0 0 0 2"/>
+                                            <Setter Property="BorderBrush" TargetName="border" Value="DarkRed"/>
+                                            <Setter Property="Source" TargetName="SerchImage" Value="Images/Lotto serch icon Button Down.png"/>
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
@@ -505,6 +474,9 @@ Find a match with your number
         <Border Grid.Column="6" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF5781A6"/>
         <Border Grid.Column="7" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF5781A6"/>
         <Border Grid.Column="8" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FFD8E6F3"/>
+        <Border Grid.Column="9" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF385772"/>
+
+
 
         <ProgressBar Grid.Column="1"
                      Grid.Row="1"
@@ -660,13 +632,21 @@ Find a match with your number
         </Border>
 
 
-        <Label Grid.Column="9" Grid.Row="1"
+        <Label Grid.Column="8" Grid.Row="1"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"
                Content="Result List"
                FontSize="30"
                FontWeight="Bold"
                Foreground="#FF3333F3"/>
+
+        <Label Grid.Column="9" Grid.Row="1"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Content="Top Matches"
+               FontSize="30"
+               FontWeight="Bold"
+               Foreground="WhiteSmoke"/>
 
         <!--<Label Grid.Row="2"
                HorizontalAlignment="Center"
@@ -787,6 +767,18 @@ Find a match with your number
             </ItemsControl>
         </ScrollViewer>
 
+        <ScrollViewer Grid.Row="2" Grid.Column="9"
+                      CanContentScroll="True"
+                      VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <ItemsControl ItemsSource="{Binding SimilarityHolderViews}" >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:TopSimilaritiesList Padding="10 7 0 0"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
 
         <StackPanel Grid.Column="9" Panel.ZIndex="1" Grid.Row="2" Width="40" HorizontalAlignment="Right">
             <Button x:Name="topSimilaritiesCloase" Content="Hide"
@@ -890,17 +882,20 @@ Find a match with your number
         </local:PopupBubble>
 
 
-        <local:TopSimilarities x:Name="topSimilaritiesList" Grid.Row="1" Grid.Column="8" Grid.ColumnSpan="1" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
-            <local:TopSimilarities.RenderTransform>
+        <local:DrawSequenceVisual x:Name="topSimilaritiesList" 
+                               Grid.Row="1"
+                               Grid.ColumnSpan="10"
+                               Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+            <local:DrawSequenceVisual.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
                     <RotateTransform/>
-                    <TranslateTransform X="406"/>
+                    <TranslateTransform X="2000"/>
                 </TransformGroup>
-            </local:TopSimilarities.RenderTransform>
+            </local:DrawSequenceVisual.RenderTransform>
 
-        </local:TopSimilarities>
+        </local:DrawSequenceVisual>
 
         <!--<local:Chart x:Name="numbersChart" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="8" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
             <local:Chart.RenderTransform>

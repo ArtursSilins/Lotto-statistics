@@ -5,14 +5,36 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LotteryNumCheck"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="50" d:DesignWidth="50">
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="35"/>
             <ColumnDefinition Width="35"/>
-
         </Grid.ColumnDefinitions>
-        <Border Background="{Binding Colour}"
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Margin="0 5 0 0"
+                    CornerRadius="4"
+                    Height="6"
+                    Width="6"
+                    Background="{Binding SecondAppearance}" />
+            <Border Margin="0 0 0 5"
+                    CornerRadius="4"
+                    Grid.Row="1"
+                    Height="6"
+                    Width="6"
+                    Background="{Binding SecondAppearance}" />
+        </Grid>
+
+
+        <Border Grid.Column="1" 
+                Background="{Binding Colour}"
                 CornerRadius="8"
                 Margin="3 3 3 3">
             <TextBlock HorizontalAlignment="Center"
@@ -22,7 +44,7 @@
                        Foreground="{Binding NumberColour}"
                    FontWeight="SemiBold" />
         </Border>
-        <Border Grid.Column="1" 
+        <Border Grid.Column="2" 
                 CornerRadius="15"
                 Margin="3 3 3 3">
             <TextBlock HorizontalAlignment="Center"

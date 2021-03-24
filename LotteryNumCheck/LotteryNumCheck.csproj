@@ -71,6 +71,17 @@
     <Compile Include="Chart.xaml.cs">
       <DependentUpon>Chart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DrawNumber.cs" />
+    <Compile Include="DrawSequenceItem.xaml.cs">
+      <DependentUpon>DrawSequenceItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DrawSequenceVisual.xaml.cs">
+      <DependentUpon>DrawSequenceVisual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DrawSequenceVisualItems.xaml.cs">
+      <DependentUpon>DrawSequenceVisualItems.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DrawSequenceVisualList.cs" />
     <Compile Include="FindMatchInResults.cs" />
     <Compile Include="Chart\LiveChart.cs" />
     <Compile Include="DownloadingResources\NumberDownloader.cs" />
@@ -88,6 +99,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Chart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DrawSequenceItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DrawSequenceVisual.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DrawSequenceVisualItems.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -224,6 +247,8 @@
   <ItemGroup>
     <Resource Include="Images\Lotto serch icon 96dpi %28Green%29.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Lotto serch icon Button Down.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
