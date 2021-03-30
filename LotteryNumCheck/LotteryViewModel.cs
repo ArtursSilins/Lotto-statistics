@@ -16,14 +16,14 @@ using System.Windows.Threading;
 
 namespace LotteryNumCheck
 {
-    public class LotteryViewModel:ViewModelBase
+    public class LotteryViewModel : ViewModelBase
     {
-        
+
         public ICommand FindMatch { get; private set; }
         public ICommand TopSimilaritiesOpen { get; private set; }
         public ICommand TopSimilaritiesCloase { get; private set; }
-        //public ICommand ChartOpen { get; private set; }
-        //public ICommand ChartCloase { get; private set; }
+        public ICommand NumberPatternsOpen { get; private set; }
+        public ICommand NumberPatternsCloase { get; private set; }
         public ICommand HoverOnTopSimilatities { get; private set; }
         public ICommand HoverOfTopSimilatities { get; private set; }
         public ICommand HoverOnCloase { get; private set; }
@@ -32,13 +32,13 @@ namespace LotteryNumCheck
         public ICommand HoverOfMinimize { get; private set; }
 
 
-        private ObservableCollection<VikingLottoNumbers> matchResults; 
+        private ObservableCollection<VikingLottoNumbers> matchResults;
 
         public ObservableCollection<VikingLottoNumbers> MatchResults
         {
             get
             {
-              
+
                 return matchResults;
             }
             set
@@ -85,7 +85,7 @@ namespace LotteryNumCheck
                 return num1;
             }
             set
-            {              
+            {
                 num1 = TestInput(value);
                 OnPropertyChanged(nameof(Num1));
             }
@@ -271,7 +271,7 @@ namespace LotteryNumCheck
                 OnPropertyChanged(nameof(Num6List));
             }
         }
-       
+
         private ObservableCollection<SpecificNumberAndRepeat> additionalNumList;
 
         public ObservableCollection<SpecificNumberAndRepeat> AdditionalNumList
@@ -287,7 +287,7 @@ namespace LotteryNumCheck
             }
         }
 
-#endregion
+        #endregion
 
         private ObservableCollection<VikingLottoNumbers> allNumbersList;
 
@@ -401,7 +401,7 @@ namespace LotteryNumCheck
             }
         }
 
-#endregion
+        #endregion
 
         private ObservableCollection<SimilarityHolderViewModel> similarityHolderViews;
 
@@ -445,7 +445,7 @@ namespace LotteryNumCheck
                 OnPropertyChanged(nameof(EnableButton));
             }
         }
-               
+
         #region PopupBuble Properties
 
         private string topSimilaritiesVisibility;
@@ -471,28 +471,28 @@ namespace LotteryNumCheck
             }
         }
 
-        //private string chartVisibility;
+        private string numberPatternsVisibility;
 
-        //public string ChartVisibility
-        //{
-        //    get { return chartVisibility; }
-        //    set
-        //    {
-        //        chartVisibility = value;
-        //        OnPropertyChanged(nameof(ChartVisibility));
-        //    }
-        //}
-        //private string chartCloaseVisibility;
-        //public string ChartCloaseVisibility
-        //{
-        //    get { return chartCloaseVisibility; }
-        //    set
-        //    {
-        //        chartCloaseVisibility = value;
-        //        OnPropertyChanged(nameof(ChartCloaseVisibility));
-        //    }
-        //}
-                          
+        public string NumberPatternsVisibility
+        {
+            get { return numberPatternsVisibility; }
+            set
+            {
+                numberPatternsVisibility = value;
+                OnPropertyChanged(nameof(NumberPatternsVisibility));
+            }
+        }
+        private string numberPatternsCloaseVisibility;
+        public string NumberPatternsCloaseVisibility
+        {
+            get { return numberPatternsCloaseVisibility; }
+            set
+            {
+                numberPatternsCloaseVisibility = value;
+                OnPropertyChanged(nameof(NumberPatternsCloaseVisibility));
+            }
+        }
+
 
         private string topSimilaritiesPopupBuble;
 
@@ -663,8 +663,8 @@ namespace LotteryNumCheck
             TopSimilaritiesOpen = new RelayCommand(TopSimilaritiesOpenHidden);
             TopSimilaritiesCloase = new RelayCommand(TopSimilaritiesCloaseHidden);
 
-            //ChartOpen = new RelayCommand(ChartOpenHidden);
-            //ChartCloase = new RelayCommand(ChartCloaseHidden);
+            NumberPatternsOpen = new RelayCommand(NumberPatternsOpenHidden);
+            NumberPatternsCloase = new RelayCommand(NumberPatternsCloaseHidden);
 
             HoverOnTopSimilatities = new RelayCommand(MouseOver);
             HoverOfTopSimilatities = new RelayCommand(MouseLeave);
@@ -688,26 +688,25 @@ namespace LotteryNumCheck
             Timer.Interval = TimeSpan.FromSeconds(1);
             Timer.Tick += Timer_Tick;
 
-            AllNumbersListGetter(numberDownloader.GetAllNumbersParalelAsync(ProgressValue), ProgressValue ).ContinueWith((task) => { AllNumbersList = task.Result; });
+            AllNumbersListGetter(numberDownloader.GetAllNumbersParalelAsync(ProgressValue), ProgressValue).ContinueWith((task) => { AllNumbersList = task.Result; });
 
             FindMatch = new RelayCommand(StartCalculations);
         }
-
         private void Timer_Tick(object sender, EventArgs e)
         {
             TimerTickCounter++;
 
-            if(TimerTickCounter == 2)
+            if (TimerTickCounter == 2)
             {
                 ProgressBarVisibility = "Hidden";
                 Timer.Stop();
             }
-           
+
         }
 
         private void ProgressValue_ProgressChanged(object sender, int e)
         {
-            if(!NumberDownloaderProgressGetter.IsEnd)
+            if (!NumberDownloaderProgressGetter.IsEnd)
                 ProgressValue = e;
             else
                 ProgressValue += e;
@@ -717,7 +716,7 @@ namespace LotteryNumCheck
                 NumberDownloaderProgressGetter.IsEnd = true;
                 ProgressValue = 0;
             }
-            else if(ProgressValue == 100 && NumberDownloaderProgressGetter.IsEnd)
+            else if (ProgressValue == 100 && NumberDownloaderProgressGetter.IsEnd)
             {
                 Timer.Start();
             }
@@ -742,7 +741,7 @@ namespace LotteryNumCheck
             PopupBottomVisibility = "Hidden";
             PopupBubleText = "Minimize";
             MinimizePopupBuble = "Visible";
-        }       
+        }
 
         private void MouseLeaveCloase()
         {
@@ -773,25 +772,25 @@ namespace LotteryNumCheck
         }
 
         private void TopSimilaritiesOpenHidden()
-        {           
+        {
             TopSimilaritiesVisibility = "Hidden";
             TopSimilaritiesCloaseVisibility = "Visible";
         }
         private void TopSimilaritiesCloaseHidden()
-        {          
+        {
             TopSimilaritiesCloaseVisibility = "Hidden";
             TopSimilaritiesVisibility = "Visible";
         }
-        //private void ChartOpenHidden()
-        //{
-        //    ChartVisibility = "Hidden";
-        //    ChartCloaseVisibility = "Visible";
-        //}
-        //private void ChartCloaseHidden()
-        //{
-        //    ChartCloaseVisibility = "Hidden";
-        //    ChartVisibility = "Visible";
-        //}
+        private void NumberPatternsOpenHidden()
+        {
+            NumberPatternsVisibility = "hidden";
+            NumberPatternsCloaseVisibility = "visible";
+        }
+        private void NumberPatternsCloaseHidden()
+        {
+            NumberPatternsCloaseVisibility = "hidden";
+            NumberPatternsVisibility = "visible";
+        }
         #endregion
 
         private bool DigitCheck(string value)
@@ -814,7 +813,7 @@ namespace LotteryNumCheck
                 MatchResults = FindMatchInResults.GetSimilarities(Convert.ToInt16(Num1), Convert.ToInt16(Num2), Convert.ToInt16(Num3),
                     Convert.ToInt16(Num4), Convert.ToInt16(Num5), Convert.ToInt16(Num6),
                     Convert.ToInt16(AdditionalNum), AllNumbersList, Convert.ToInt16(MinCountOfMatch));
-            }           
+            }
             else
             {
                 WrongInputMessage = "Visible";
@@ -838,7 +837,7 @@ namespace LotteryNumCheck
             if (DigitCheck(value))
             {
                 WrongInputMessage = "Hidden";
-                return value;              
+                return value;
             }
             else
             {
@@ -849,7 +848,7 @@ namespace LotteryNumCheck
             }
 
         }
-           
+
         private void AddLastWinNumbers(ObservableCollection<VikingLottoNumbers> vikingLottoNumbers, IProgress<int> progress)
         {
             LastWinNum1 = vikingLottoNumbers[0].Num1;
@@ -940,7 +939,7 @@ namespace LotteryNumCheck
 
             string text = "";
 
-            while (indexCounter <numbers.Length)
+            while (indexCounter < numbers.Length)
             {
                 numbers[indexCounter] = numberCounter;
 
@@ -958,7 +957,7 @@ namespace LotteryNumCheck
                     {
                         if (num < 10)
                         {
-                            text += num.ToString()+" ";
+                            text += num.ToString() + " ";
                             apearanceCounter++;
                         }
                         else
@@ -966,7 +965,7 @@ namespace LotteryNumCheck
                             text += num.ToString();
                             apearanceCounter++;
                         }
-                       
+
 
                         //text += " [" + drowCount + "] ";
                         //drawCount = 0;
@@ -977,13 +976,13 @@ namespace LotteryNumCheck
                     }
                     //drowCount++;
                 }
-                
+
                 text += " Average: " + (Convert.ToDouble(lottoTask.Count) / Convert.ToDouble(apearanceCounter)).ToString("0.00") + Environment.NewLine/* + Environment.NewLine*/;
 
                 apearanceCounter = 0;
             }
 
-            text += Environment.NewLine + " Total Times "+ lottoTask.Count.ToString();
+            text += Environment.NewLine + " Total Times " + lottoTask.Count.ToString();
 
             foreach (var item in lottoTask)
             {
@@ -1010,7 +1009,7 @@ namespace LotteryNumCheck
 
             DrawSequenceVisualList sequenceVisualList1 = new DrawSequenceVisualList();
 
-            sequenceVisualList1.NumList = new List<DrawNumber>(); 
+            sequenceVisualList1.NumList = new List<DrawNumber>();
 
             sequenceVisualList1.NumList.Add(drawNumber);
             sequenceVisualList1.NumList.Add(drawNumber1);
@@ -1018,8 +1017,7 @@ namespace LotteryNumCheck
             SequenceVisualList = new ObservableCollection<DrawSequenceVisualList>();
             SequenceVisualList.Add(sequenceVisualList1);
 
-            File.WriteAllText(@"C:\Users\X\Desktop\Average.txt", text);
         }
-     
+
     }
 }

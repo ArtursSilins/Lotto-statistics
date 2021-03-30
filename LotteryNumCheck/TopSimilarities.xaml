@@ -7,12 +7,45 @@
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="405">
     <Grid Background="#FF385772" Opacity="0.9" >
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="45"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ScrollViewer Padding="30 0 0 0 " Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="350" VerticalScrollBarVisibility="Auto">
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Numbers"
+                   FontSize="25"
+                   Margin="0 0 30 0"
+                   Foreground="WhiteSmoke"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+
+            <Label Content="Repeats"
+                   Grid.Column="1"
+                   FontSize="25"
+                   Margin="0 0 30 0"
+                   Foreground="WhiteSmoke"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+
+
+        </Grid>
+
+        <ScrollViewer Padding="30 0 0 0 "
+                      Grid.Row="1"
+                      HorizontalAlignment="Left"
+                      Width="350"
+                      VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding SimilarityHolderViews}" >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

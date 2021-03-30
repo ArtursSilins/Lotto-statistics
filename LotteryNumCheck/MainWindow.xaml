@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LotteryNumCheck"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="Lotto Statistic"
         Height="1000"
@@ -31,18 +31,18 @@
                 </DoubleAnimationUsingKeyFrames>
             </Storyboard>
 
-            <!--<Storyboard x:Key="AnimatedNumbersChartOn">
+            <Storyboard x:Key="DrawSequenceVisualOn">
                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="numbersChart">
-                    <EasingDoubleKeyFrame KeyTime="0" Value="1106"/>
+                    <EasingDoubleKeyFrame KeyTime="0" Value="2000"/>
                     <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
                 </DoubleAnimationUsingKeyFrames>
             </Storyboard>
-            <Storyboard x:Key="AnimatedNumbersChartOff">
+            <Storyboard x:Key="DrawSequenceVisualOff">
                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="numbersChart">
                     <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1106"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="2000"/>
                 </DoubleAnimationUsingKeyFrames>
-            </Storyboard>-->
+            </Storyboard>
 
             <!--#region Popup bubles-->
 
@@ -101,12 +101,12 @@
             <BeginStoryboard x:Name="AnimatedTopSimilarities_BeginStoryboard1" Storyboard="{StaticResource AnimationTopSimilaritiesOff}"/>
         </EventTrigger>
 
-        <!--<EventTrigger RoutedEvent="Button.Click" SourceName="ResultChart">
-            <BeginStoryboard Storyboard="{StaticResource AnimatedNumbersChartOn}"/>
+        <EventTrigger RoutedEvent="Button.Click" SourceName="DrawSequenceVisualOpen">
+            <BeginStoryboard Storyboard="{StaticResource DrawSequenceVisualOn}"/>
         </EventTrigger>
-        <EventTrigger RoutedEvent="Button.Click" SourceName="ResultChartCloase">
-            <BeginStoryboard Storyboard="{StaticResource AnimatedNumbersChartOff}"/>
-        </EventTrigger>-->
+        <EventTrigger RoutedEvent="Button.Click" SourceName="DrawSequenceVisualClose">
+            <BeginStoryboard Storyboard="{StaticResource DrawSequenceVisualOff}"/>
+        </EventTrigger>
 
         <!--#region Popup Bubble Trigers-->
         <EventTrigger RoutedEvent="MouseEnter" SourceName="Minimize">
@@ -134,20 +134,21 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="405"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+            <!--<ColumnDefinition Width="96*"/>-->
+            <!--<ColumnDefinition Width="69*"/>-->
         </Grid.ColumnDefinitions>
 
 
-        <Grid Grid.ColumnSpan="10"
+        <Grid Grid.ColumnSpan="11"
               Background="#FF549797" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
 
             <Grid.ColumnDefinitions>
@@ -175,7 +176,7 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
-         
+
             <Button x:Name="Cloase" Grid.Column="2" Content="✘" Background="Transparent" BorderThickness="0" Foreground="#FFA61D1D" FontSize="25" Width="40" Height="40" Click="Button_Click">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseEnter">
@@ -188,9 +189,9 @@
             </Button>
         </Grid>
 
-        <Border Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="2" Background="#FF466885"/>
+        <Border Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="2" Background="#FF466885" Margin="0,0,0.4,0"/>
 
-        <Grid Grid.Row="1" Grid.RowSpan="2">
+        <Grid Grid.Row="1" Grid.RowSpan="2" Margin="0,0,0.4,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="40"/>
@@ -339,7 +340,7 @@ Find a match with your number
                        FontWeight="Bold"
                        Text="{Binding Num6}" ToolTip="Enter a number"/>
             </Border>
-          
+
             <TextBox Grid.Column="7"
                      Grid.Row="1"
                    VerticalAlignment="Center"
@@ -435,11 +436,11 @@ Find a match with your number
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
-                       
+
                     </Style>
-                    
+
                 </Button.Style>
-             
+
             </Button>
 
             <Label Grid.Row="4" Grid.ColumnSpan="10" Margin="0 -100 0 0"
@@ -450,18 +451,18 @@ Find a match with your number
                Foreground="White"
                Visibility="{Binding WrongInputMessage}" />
 
-        <ScrollViewer 
+            <ScrollViewer 
                       Grid.Row="4" Grid.ColumnSpan="10"
                       Width="350"
                       VerticalScrollBarVisibility="Auto">
-            <ItemsControl ItemsSource="{Binding MatchResults}" >
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <local:Results Padding="0 10 0 0"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+                <ItemsControl ItemsSource="{Binding MatchResults}" >
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <local:Results Padding="0 10 0 0"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
 
 
         </Grid>
@@ -473,22 +474,22 @@ Find a match with your number
         <Border Grid.Column="5" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF5781A6"/>
         <Border Grid.Column="6" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF5781A6"/>
         <Border Grid.Column="7" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF5781A6"/>
-        <Border Grid.Column="8" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FFD8E6F3"/>
-        <Border Grid.Column="9" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF385772"/>
+        <Border Grid.Column="9" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FFD8E6F3" Grid.ColumnSpan="1"/>
+        <!--<Border Grid.Column="8" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF385772" Grid.ColumnSpan="3" Margin="336.6,0,0,0"/>-->
 
 
 
         <ProgressBar Grid.Column="1"
                      Grid.Row="1"
-                     Margin="3 0 3 0"
+                     Margin="2.6,0,3.4,0"
                      Grid.ColumnSpan="7"
                      Height="4"
                      VerticalAlignment="Bottom"
                      Visibility="{Binding ProgressBarVisibility}"
                      Value="{Binding ProgressValue}" Foreground="Red">
-            
+
         </ProgressBar>
-        
+
         <Border Grid.Column="1" Grid.Row="1"
                 ToolTip="Last drawn lotto numbers"
                     Background="White"
@@ -497,7 +498,7 @@ Find a match with your number
                     CornerRadius="50"
                     Width="50"
                     Height="50"
-                    Margin="15 30 15 60">
+                    >
             <TextBox 
                        Margin="7 3 7 3"
                        VerticalAlignment="Center"
@@ -517,7 +518,7 @@ Find a match with your number
                     CornerRadius="50"
                     Width="50"
                     Height="50"
-                    Margin="15 30 15 60">
+                    >
             <TextBox 
                        Margin="7 3 7 3"
                        VerticalAlignment="Center"
@@ -537,7 +538,7 @@ Find a match with your number
                     CornerRadius="50"
                     Width="50"
                     Height="50"
-                    Margin="15 30 15 60">
+                    >
             <TextBox 
                        Margin="7 3 7 3"
                        VerticalAlignment="Center"
@@ -557,7 +558,7 @@ Find a match with your number
                     CornerRadius="50"
                     Width="50"
                     Height="50"
-                    Margin="15 30 15 60">
+                    >
             <TextBox 
                        Margin="7 3 7 3"
                        VerticalAlignment="Center"
@@ -577,7 +578,7 @@ Find a match with your number
                     CornerRadius="50"
                     Width="50"
                     Height="50"
-                    Margin="15 30 15 60">
+                    >
             <TextBox 
                        Margin="7 3 7 3"
                        VerticalAlignment="Center"
@@ -597,7 +598,7 @@ Find a match with your number
                     CornerRadius="50"
                     Width="50"
                     Height="50"
-                    Margin="15 30 15 60">
+                    >
             <TextBox 
                        Margin="7 3 7 3"
                        VerticalAlignment="Center"
@@ -617,7 +618,7 @@ Find a match with your number
                     CornerRadius="50"
                     Width="50"
                     Height="50"
-                    Margin="15 30 15 60">
+                    >
             <TextBox 
                        Margin="7 3 7 3"
                        VerticalAlignment="Center"
@@ -638,15 +639,15 @@ Find a match with your number
                Content="Result List"
                FontSize="30"
                FontWeight="Bold"
-               Foreground="#FF3333F3"/>
+               Foreground="#FF3333F3" Margin="91.6,45,91.2,45"/>
 
-        <Label Grid.Column="9" Grid.Row="1"
+        <!--<Label Grid.Column="9" Grid.Row="1"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"
                Content="Top Matches"
                FontSize="30"
                FontWeight="Bold"
-               Foreground="WhiteSmoke"/>
+               Foreground="WhiteSmoke" Grid.ColumnSpan="2" Margin="0.8,45,1,45"/>-->
 
         <!--<Label Grid.Row="2"
                HorizontalAlignment="Center"
@@ -767,9 +768,9 @@ Find a match with your number
             </ItemsControl>
         </ScrollViewer>
 
-        <ScrollViewer Grid.Row="2" Grid.Column="9"
+        <!--<ScrollViewer Grid.Row="2" Grid.Column="8"
                       CanContentScroll="True"
-                      VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="336.6,0,0,0">
             <ItemsControl ItemsSource="{Binding SimilarityHolderViews}" >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -777,115 +778,193 @@ Find a match with your number
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </ScrollViewer>
+        </ScrollViewer>-->
 
 
-        <StackPanel Grid.Column="9" Panel.ZIndex="1" Grid.Row="2" Width="40" HorizontalAlignment="Right">
-            <Button x:Name="topSimilaritiesCloase" Content="Hide"
-                    Padding="-1" Grid.Column="9" Grid.Row="2" Width="200"
-                    Height="38" Background="White"  Foreground="#FFC50F0F" FontWeight="Bold"
-                    FontSize="25" 
-                    Visibility="{Binding TopSimilaritiesCloaseVisibility}"
-                    Command="{Binding TopSimilaritiesCloase}">
-                <Button.LayoutTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="90"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Button.LayoutTransform>
+        <Grid Grid.Column="8"
+              Grid.Row="1"
+              Grid.RowSpan="2"
+              Panel.ZIndex="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
 
-            </Button>
-            <!--<Button x:Name="ResultChartCloase" Margin="0 10 0 0" Content="Hide"
-                    Grid.Column="9" Grid.Row="2" Width="200" Height="38"
-                    Background="Red"  Foreground="White" FontWeight="Bold"
+            <Grid.RowDefinitions>
+                <RowDefinition Height="140"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Column="1"
+                        Panel.ZIndex="2"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Width="100"
+                        HorizontalAlignment="Right">
+                
+                <Button x:Name="topSimilaritiesCloase"
+                        Content="Hide"
+                        Width="80" Height="80"
+                        Background="White" 
+                        Foreground="#FFC50F0F"
+                        FontWeight="Bold"
+                        FontSize="25" 
+                        Visibility="{Binding TopSimilaritiesCloaseVisibility}"
+                        Command="{Binding TopSimilaritiesCloase}">
+                   
+                </Button>
+                <Button x:Name="DrawSequenceVisualClose"
+                    Margin="0 10 0 0"
+                    Width="80" Height="80"
+                    Foreground="White"
+                    FontWeight="Bold"
                     FontSize="25"
-                    Visibility="{Binding ChartCloaseVisibility}"
-                    Command="{Binding ChartCloase}">
-                <Button.LayoutTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="90"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Button.LayoutTransform>
+                    Visibility="{Binding NumberPatternsCloaseVisibility}"
+                    Command="{Binding NumberPatternsCloase}">
+                    
+                </Button>
+            </StackPanel>
 
-            </Button>-->
-        </StackPanel>
 
-        <StackPanel Grid.Column="9" Panel.ZIndex="1" Grid.Row="2" Width="40" HorizontalAlignment="Right">
+            <StackPanel Grid.Column="1"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Panel.ZIndex="2"
+                        Width="100"
+                        HorizontalAlignment="Right">
 
-            <Button x:Name="topSimilarities" Content="Top Matches"
-                    Padding="-1" Grid.Column="9" Grid.Row="2" Width="200"
-                    Height="38" Background="White"  Foreground="#FFC50F0F" FontWeight="Bold"
-                    FontSize="25" 
-                    Visibility="{Binding TopSimilaritiesVisibility}"
-                    Command="{Binding TopSimilaritiesOpen}">
-                <Button.LayoutTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="90"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Button.LayoutTransform>
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseEnter">
-                        <i:InvokeCommandAction Command="{Binding HoverOnTopSimilatities}"/>
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="MouseLeave">
-                        <i:InvokeCommandAction Command="{Binding HoverOfTopSimilatities}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
+                <Button x:Name="topSimilarities"
+                        Width="80" Height="80"
+                        Background="White"
+                        Foreground="#FFC50F0F"
+                        FontWeight="Bold"
+                        FontSize="25" 
+                        HorizontalAlignment="Right"
+                        Visibility="{Binding TopSimilaritiesVisibility}"
+                        Command="{Binding TopSimilaritiesOpen}">
 
-            </Button>
+                    <!--<Border>
+                        <Border.Background>
+                            <ImageBrush ImageSource=""/>
+                        </Border.Background>
+                    </Border>-->
+                    
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseEnter">
+                            <i:InvokeCommandAction Command="{Binding HoverOnTopSimilatities}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="MouseLeave">
+                            <i:InvokeCommandAction Command="{Binding HoverOfTopSimilatities}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
 
-            <!--<Button x:Name="ResultChart" Margin="0 10 0 0" Content="Chart"
-                    Grid.Column="9" Grid.Row="2" Width="200" Height="38"
-                    Background="White"  Foreground="Red" FontWeight="Bold"
-                    FontSize="25"
-                    Visibility="{Binding ChartVisibility}"
-                    Command="{Binding ChartOpen}" >
-                <Button.LayoutTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="90"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Button.LayoutTransform>
+                </Button>
 
-            </Button>-->
-        </StackPanel>
+                <Button x:Name="DrawSequenceVisualOpen"
+                        Margin="0 10 0 0"
+                        Width="80" Height="80"
+                        Background="White"
+                        Foreground="Red"
+                        FontWeight="Bold"
+                        FontSize="25"
+                        HorizontalAlignment="Right"
+                        Visibility="{Binding NumberPatternsVisibility}"
+                        Command="{Binding NumberPatternsOpen}" >
+                   
+                </Button>
+            </StackPanel>
 
-        <local:PopupBubble x:Name="MinimizeBuble" Grid.Row="1" Grid.Column="9"
+
+
+            <local:PopupBubble x:Name="MinimizeBuble"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               MaxWidth="80"
+                               MinWidth="80"
+                               Margin="0 0 50 0"
+                               Opacity="0.8"
+                               Height="50"
+                               Panel.ZIndex="1"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Right"
+                               Visibility="{Binding MinimizePopupBuble}">
+
+            </local:PopupBubble>
+
+            <local:PopupBubble x:Name="CloaseBuble"
+                               Grid.Column="1"
+                               Opacity="0.8"
+                               Height="50"
+                               MaxWidth="70"
+                               MinWidth="70"
+                               Panel.ZIndex="1"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Top"
+                               Visibility="{Binding CloasePopupBuble}">
+
+            </local:PopupBubble>
+
+            <local:PopupBubble x:Name="TopSimilaritiesPopupBuble"
+                               Grid.Column="1"
+                               Opacity="0.8"
+                               Height="50"
+                               MinWidth="100"
+                               MaxWidth="100"
+                               Margin="0 0 0 5"
+                               VerticalAlignment="Bottom"
+                               HorizontalAlignment="Right"
+                               Visibility="{Binding TopSimilaritiesPopupBuble}">
+
+            </local:PopupBubble>
+
+
+        </Grid>
+        
+        <!--<local:PopupBubble x:Name="MinimizeBuble" Grid.Row="1" Grid.Column="8"
                            Opacity="0.8" Height="50" Width="Auto"
-                           Margin="260 -90 55 0" Panel.ZIndex="1"
+                           Margin="163.8,0,-95,90" Panel.ZIndex="1"
                            Visibility="{Binding MinimizePopupBuble}">
 
         </local:PopupBubble>
 
-        <local:PopupBubble x:Name="CloaseBuble" Grid.Row="1" Grid.Column="9"
+        <local:PopupBubble x:Name="CloaseBuble" Grid.Row="1" Grid.Column="8"
                            Opacity="0.8" Height="50" Width="Auto"
-                           Margin="300 -90 5 0" Panel.ZIndex="1"
+                           Margin="300,0,-135,90" Panel.ZIndex="1"
                            Visibility="{Binding CloasePopupBuble}">
 
         </local:PopupBubble>
 
         <local:PopupBubble x:Name="TopSimilaritiesPopupBuble"
-                           Grid.Row="1" Grid.Column="9" Opacity="0.8"
-                           Height="50" Width="Auto" Margin="270 90 5 0"
+                           Grid.Row="1" Grid.Column="8" Opacity="0.8"
+                           Height="50" Width="Auto" Margin="173.8,90,-105,0"
                            Visibility="{Binding TopSimilaritiesPopupBuble}">
 
-        </local:PopupBubble>
+        </local:PopupBubble>-->
 
 
-        <local:DrawSequenceVisual x:Name="topSimilaritiesList" 
+        <local:TopSimilarities x:Name="topSimilaritiesList" 
                                Grid.Row="1"
-                               Grid.ColumnSpan="10"
-                               Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+                               Grid.Column="8"
+                               Grid.ColumnSpan="1"
+                               Grid.RowSpan="2" 
+                               >
+            <local:TopSimilarities.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform X="1000"/>
+                </TransformGroup>
+            </local:TopSimilarities.RenderTransform>
+
+        </local:TopSimilarities>
+
+        <local:DrawSequenceVisual x:Name="numbersChart"
+                     Grid.Row="1"
+                     Grid.ColumnSpan="9"
+                     Grid.RowSpan="2"
+                     >
             <local:DrawSequenceVisual.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -894,18 +973,6 @@ Find a match with your number
                     <TranslateTransform X="2000"/>
                 </TransformGroup>
             </local:DrawSequenceVisual.RenderTransform>
-
         </local:DrawSequenceVisual>
-
-        <!--<local:Chart x:Name="numbersChart" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="8" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
-            <local:Chart.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform X="1106"/>
-                </TransformGroup>
-            </local:Chart.RenderTransform>
-        </local:Chart>-->
     </Grid>
 </Window>
