@@ -26,6 +26,8 @@ namespace LotteryNumCheck
         public ICommand NumberPatternsCloase { get; private set; }
         public ICommand HoverOnTopSimilatities { get; private set; }
         public ICommand HoverOfTopSimilatities { get; private set; }
+        public ICommand HoverOnNumberPatterns { get; private set; }
+        public ICommand HoverOfNumberPatterns { get; private set; }
         public ICommand HoverOnCloase { get; private set; }
         public ICommand HoverOfCloase { get; private set; }
         public ICommand HoverOnMinimize { get; private set; }
@@ -506,6 +508,19 @@ namespace LotteryNumCheck
             }
         }
 
+        private string drawSequenceVisualPopupBuble;
+
+        public string DrawSequenceVisualPopupBuble
+        {
+            get { return drawSequenceVisualPopupBuble; }
+            set
+            {
+                drawSequenceVisualPopupBuble = value;
+                OnPropertyChanged(nameof(DrawSequenceVisualPopupBuble));
+            }
+        }
+
+
         private string cloasePopupBuble;
 
         public string CloasePopupBuble
@@ -654,6 +669,7 @@ namespace LotteryNumCheck
             EnableButton = false;
 
             CloasePopupBuble = "Hidden";
+            DrawSequenceVisualPopupBuble = "Hidden";
             TopSimilaritiesPopupBuble = "Hidden";
             MinimizePopupBuble = "Hidden";
             ProgressBarVisibility = "Visible";
@@ -668,6 +684,9 @@ namespace LotteryNumCheck
 
             HoverOnTopSimilatities = new RelayCommand(MouseOver);
             HoverOfTopSimilatities = new RelayCommand(MouseLeave);
+
+            HoverOnNumberPatterns = new RelayCommand(MouseOverNumberPatterns);
+            HoverOfNumberPatterns = new RelayCommand(MouseLeaveNumberPatterns);
 
             HoverOnCloase = new RelayCommand(MouseOverCloase);
             HoverOfCloase = new RelayCommand(MouseLeaveCloase);
@@ -692,6 +711,21 @@ namespace LotteryNumCheck
 
             FindMatch = new RelayCommand(StartCalculations);
         }
+
+        private void MouseLeaveNumberPatterns()
+        {
+            DrawSequenceVisualPopupBuble = "Hidden";
+        }
+
+        private void MouseOverNumberPatterns()
+        {
+            PopupBubleTopPlacement = "Right";
+            PopupTopVisibility = "Visible";
+            PopupBottomVisibility = "Hidden";
+            PopupBubleText = "Number Patterns";
+            DrawSequenceVisualPopupBuble = "Visible";
+        }
+
         private void Timer_Tick(object sender, EventArgs e)
         {
             TimerTickCounter++;
@@ -775,21 +809,27 @@ namespace LotteryNumCheck
         {
             TopSimilaritiesVisibility = "Hidden";
             TopSimilaritiesCloaseVisibility = "Visible";
+            NumberPatternsVisibility = "Hidden";
+            NumberPatternsCloaseVisibility = "Hidden";
         }
         private void TopSimilaritiesCloaseHidden()
         {
             TopSimilaritiesCloaseVisibility = "Hidden";
             TopSimilaritiesVisibility = "Visible";
+            NumberPatternsVisibility = "Visible";
         }
         private void NumberPatternsOpenHidden()
         {
             NumberPatternsVisibility = "hidden";
             NumberPatternsCloaseVisibility = "visible";
+            TopSimilaritiesCloaseVisibility = "Hidden";
+            TopSimilaritiesVisibility = "Hidden";
         }
         private void NumberPatternsCloaseHidden()
         {
             NumberPatternsCloaseVisibility = "hidden";
             NumberPatternsVisibility = "visible";
+            TopSimilaritiesVisibility = "Visible";
         }
         #endregion
 

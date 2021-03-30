@@ -91,26 +91,6 @@ C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNum
 C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\LiveCharts.xml
 C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\LiveCharts.Wpf.pdb
 C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\LiveCharts.Wpf.xml
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\ru\Microsoft.Expression.Interactions.resources.dll
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\de\System.Windows.Interactivity.resources.dll
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\en\System.Windows.Interactivity.resources.dll
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\es\System.Windows.Interactivity.resources.dll
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\fr\System.Windows.Interactivity.resources.dll
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\it\System.Windows.Interactivity.resources.dll
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\ja\System.Windows.Interactivity.resources.dll
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\ko\System.Windows.Interactivity.resources.dll
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\ru\System.Windows.Interactivity.resources.dll
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
-C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
 C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\obj\Debug\LotteryNumCheck.csprojAssemblyReference.cache
 C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\obj\Debug\AdditionalNumResultList.g.cs
 C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\obj\Debug\AllResultList.g.cs
@@ -282,3 +262,6 @@ C:\Users\X\Source\Repos\Lotto-statistics\LotteryNumCheck\obj\Debug\LotteryNumChe
 C:\Users\X\Source\Repos\Lotto-statistics\LotteryNumCheck\obj\Debug\LotteryNumCheck.csproj.CopyComplete
 C:\Users\X\Source\Repos\Lotto-statistics\LotteryNumCheck\obj\Debug\LotteryNumCheck.exe
 C:\Users\X\Source\Repos\Lotto-statistics\LotteryNumCheck\obj\Debug\LotteryNumCheck.pdb
+C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Users\artur\Documents\Visual Studio 2017\Projects\Lotto-statistics\LotteryNumCheck\bin\Debug\Microsoft.Xaml.Behaviors.xml

@@ -88,6 +88,21 @@
                                  BeginTime="0:0:5"/>
             </Storyboard>
 
+            <Storyboard x:Key="AnimatedDrawSequenceVisualPopupBuble">
+                <DoubleAnimation Storyboard.TargetName="DrawSequenceVisualPopupBuble"
+                                 Storyboard.TargetProperty="Opacity"
+                                 From="0" To="0" Duration="0:0:0.5"/>
+                <DoubleAnimation Storyboard.TargetName="DrawSequenceVisualPopupBuble"
+                                 Storyboard.TargetProperty="Opacity"
+                                 From="0" To="1" Duration="0:0:0.5"
+                                 BeginTime="0:0:0.5"/>
+                <DoubleAnimation Storyboard.TargetName="DrawSequenceVisualPopupBuble"
+                                 Storyboard.TargetProperty="Opacity"
+                                 From="1" To="0" Duration="0:0:0.5"
+                                 BeginTime="0:0:5"/>
+            </Storyboard>
+
+
             <!--#endregion-->
 
         </ResourceDictionary>
@@ -119,6 +134,10 @@
 
         <EventTrigger RoutedEvent="MouseEnter" SourceName="topSimilarities">
             <BeginStoryboard Storyboard="{StaticResource AnimatedTopSimilaritiesPopupBuble}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="MouseEnter" SourceName="DrawSequenceVisualOpen">
+            <BeginStoryboard Storyboard="{StaticResource AnimatedDrawSequenceVisualPopupBuble}"/>
         </EventTrigger>
         <!--#endregion-->
 
@@ -804,7 +823,7 @@ Find a match with your number
                         HorizontalAlignment="Right">
                 
                 <Button x:Name="topSimilaritiesCloase"
-                        Width="60" Height="80"
+                        Width="50" Height="70"
                         Background="White" 
                         Foreground="#FFC50F0F"
                         FontWeight="Bold"
@@ -822,7 +841,7 @@ Find a match with your number
                 </Button>
                 <Button x:Name="DrawSequenceVisualClose"
                         Margin="0 10 0 0"
-                        Width="60" Height="80"
+                        Width="50" Height="70"
                         Foreground="White"
                         FontWeight="Bold"
                         FontSize="25"
@@ -848,7 +867,7 @@ Find a match with your number
                         HorizontalAlignment="Right">
 
                 <Button x:Name="topSimilarities"
-                        Width="80" Height="80"
+                        Width="70" Height="70"
                         Background="White"
                         Foreground="#FFC50F0F"
                         FontWeight="Bold"
@@ -876,7 +895,7 @@ Find a match with your number
 
                 <Button x:Name="DrawSequenceVisualOpen"
                         Margin="0 10 0 0"
-                        Width="80" Height="80"
+                        Width="70" Height="70"
                         Background="White"
                         Foreground="Red"
                         FontWeight="Bold"
@@ -890,6 +909,16 @@ Find a match with your number
                             <ImageBrush ImageSource="Images\Patterns Icon.png"/>
                         </Border.Background>
                     </Border>
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseEnter">
+                            <i:InvokeCommandAction Command="{Binding HoverOnNumberPatterns}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="MouseLeave">
+                            <i:InvokeCommandAction Command="{Binding HoverOfNumberPatterns}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
 
                 </Button>
             </StackPanel>
@@ -937,31 +966,24 @@ Find a match with your number
 
             </local:PopupBubble>
 
+            <local:PopupBubble x:Name="DrawSequenceVisualPopupBuble"
+                               Grid.Row="1"
+                               Grid.ColumnSpan="2"
+                               Opacity="0.8"
+                               Height="50"
+                               MinWidth="127"
+                               MaxWidth="127"
+                               Margin="0 160 0 5"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Right"
+                               Visibility="{Binding DrawSequenceVisualPopupBuble}">
+
+            </local:PopupBubble>
+
 
         </Grid>
         
-        <!--<local:PopupBubble x:Name="MinimizeBuble" Grid.Row="1" Grid.Column="8"
-                           Opacity="0.8" Height="50" Width="Auto"
-                           Margin="163.8,0,-95,90" Panel.ZIndex="1"
-                           Visibility="{Binding MinimizePopupBuble}">
-
-        </local:PopupBubble>
-
-        <local:PopupBubble x:Name="CloaseBuble" Grid.Row="1" Grid.Column="8"
-                           Opacity="0.8" Height="50" Width="Auto"
-                           Margin="300,0,-135,90" Panel.ZIndex="1"
-                           Visibility="{Binding CloasePopupBuble}">
-
-        </local:PopupBubble>
-
-        <local:PopupBubble x:Name="TopSimilaritiesPopupBuble"
-                           Grid.Row="1" Grid.Column="8" Opacity="0.8"
-                           Height="50" Width="Auto" Margin="173.8,90,-105,0"
-                           Visibility="{Binding TopSimilaritiesPopupBuble}">
-
-        </local:PopupBubble>-->
-
-
+       
         <local:TopSimilarities x:Name="topSimilaritiesList" 
                                Grid.Row="1"
                                Grid.Column="8"

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:LotteryNumCheck"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="405">
-    <Grid Background="#FF385772" Opacity="0.9" >
+    <Grid Background="#FF385772" Opacity="0.97" >
 
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
@@ -14,23 +14,19 @@
         </Grid.RowDefinitions>
         
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="175"/>
+            <ColumnDefinition Width="175"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Label Content="Numbers"
+        <Label Content="Numbers"
                    FontSize="25"
                    Margin="0 0 30 0"
                    Foreground="WhiteSmoke"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"/>
 
-            <Label Content="Repeats"
+        <Label Content="Repeats"
                    Grid.Column="1"
                    FontSize="25"
                    Margin="0 0 30 0"
@@ -39,10 +35,9 @@
                    VerticalAlignment="Center"/>
 
 
-        </Grid>
-
         <ScrollViewer Padding="30 0 0 0 "
                       Grid.Row="1"
+                      Grid.ColumnSpan="2"
                       HorizontalAlignment="Left"
                       Width="350"
                       VerticalScrollBarVisibility="Auto">
