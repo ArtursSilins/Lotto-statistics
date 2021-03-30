@@ -804,25 +804,38 @@ Find a match with your number
                         HorizontalAlignment="Right">
                 
                 <Button x:Name="topSimilaritiesCloase"
-                        Content="Hide"
-                        Width="80" Height="80"
+                        Width="60" Height="80"
                         Background="White" 
                         Foreground="#FFC50F0F"
                         FontWeight="Bold"
                         FontSize="25" 
+                        HorizontalAlignment="Right"
                         Visibility="{Binding TopSimilaritiesCloaseVisibility}"
                         Command="{Binding TopSimilaritiesCloase}">
-                   
+
+                    <Border Width="45" Height="70">
+                        <Border.Background>
+                            <ImageBrush ImageSource="Images\Close Icon.png"/>
+                        </Border.Background>
+                    </Border>
+
                 </Button>
                 <Button x:Name="DrawSequenceVisualClose"
-                    Margin="0 10 0 0"
-                    Width="80" Height="80"
-                    Foreground="White"
-                    FontWeight="Bold"
-                    FontSize="25"
-                    Visibility="{Binding NumberPatternsCloaseVisibility}"
-                    Command="{Binding NumberPatternsCloase}">
-                    
+                        Margin="0 10 0 0"
+                        Width="60" Height="80"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        FontSize="25"
+                        HorizontalAlignment="Right"
+                        Visibility="{Binding NumberPatternsCloaseVisibility}"
+                        Command="{Binding NumberPatternsCloase}">
+
+                    <Border Width="45" Height="70">
+                        <Border.Background>
+                            <ImageBrush ImageSource="Images\Close Icon.png"/>
+                        </Border.Background>
+                    </Border>
+
                 </Button>
             </StackPanel>
 
@@ -844,11 +857,11 @@ Find a match with your number
                         Visibility="{Binding TopSimilaritiesVisibility}"
                         Command="{Binding TopSimilaritiesOpen}">
 
-                    <!--<Border>
+                    <Border Width="45" Height="45">
                         <Border.Background>
-                            <ImageBrush ImageSource=""/>
+                            <ImageBrush ImageSource="Images\Match Icon.png"/>
                         </Border.Background>
-                    </Border>-->
+                    </Border>
                     
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseEnter">
@@ -871,7 +884,13 @@ Find a match with your number
                         HorizontalAlignment="Right"
                         Visibility="{Binding NumberPatternsVisibility}"
                         Command="{Binding NumberPatternsOpen}" >
-                   
+
+                    <Border Width="40" Height="40">
+                        <Border.Background>
+                            <ImageBrush ImageSource="Images\Patterns Icon.png"/>
+                        </Border.Background>
+                    </Border>
+
                 </Button>
             </StackPanel>
 

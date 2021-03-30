@@ -251,5 +251,14 @@
   <ItemGroup>
     <Resource Include="Images\Lotto serch icon Button Down.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Match Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Patterns Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Close Icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
