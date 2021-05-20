@@ -14,6 +14,8 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -38,12 +40,7 @@
     <Reference Include="HtmlAgilityPack, Version=1.11.28.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.11.28\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
-      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
-    </Reference>
-    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
-      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Language.Intellisense, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
@@ -69,28 +66,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Chart.xaml.cs">
-      <DependentUpon>Chart.xaml</DependentUpon>
+    <Compile Include="AttachedProperties\ScrollViewerProperties.cs" />
+    <Compile Include="NumberPatternNoAndAverage.xaml.cs">
+      <DependentUpon>NumberPatternNoAndAverage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DrawNumber.cs" />
-    <Compile Include="DrawSequenceItem.xaml.cs">
-      <DependentUpon>DrawSequenceItem.xaml</DependentUpon>
+    <Compile Include="NumberPatternsItem.xaml.cs">
+      <DependentUpon>NumberPatternsItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DrawSequenceVisual.xaml.cs">
-      <DependentUpon>DrawSequenceVisual.xaml</DependentUpon>
+    <Compile Include="NumberPatternsVisual.xaml.cs">
+      <DependentUpon>NumberPatternsVisual.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DrawSequenceVisualItems.xaml.cs">
-      <DependentUpon>DrawSequenceVisualItems.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DrawSequenceVisualList.cs" />
-    <Compile Include="FindMatchInResults.cs" />
-    <Compile Include="Chart\LiveChart.cs" />
-    <Compile Include="DownloadingResources\NumberDownloader.cs" />
-    <Compile Include="DownloadingResources\NumberDownloaderProgressGetter.cs" />
     <Compile Include="PopupBubble.xaml.cs">
       <DependentUpon>PopupBubble.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WinNumbersList.cs" />
     <Page Include="AdditionalNumResultList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -99,19 +87,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Chart.xaml">
+    <Page Include="NumberPatternNoAndAverage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DrawSequenceItem.xaml">
+    <Page Include="NumberPatternsItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DrawSequenceVisual.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DrawSequenceVisualItems.xaml">
+    <Page Include="NumberPatternsVisual.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -129,9 +113,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ColorCode.cs" />
-    <Compile Include="Commands\FindMatchRelayCommand.cs" />
-    <Compile Include="LotteryViewModel.cs" />
     <Compile Include="Num1ResultList.xaml.cs">
       <DependentUpon>Num1ResultList.xaml</DependentUpon>
     </Compile>
@@ -150,22 +131,15 @@
     <Compile Include="Num6ResultList.xaml.cs">
       <DependentUpon>Num6ResultList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TopSimilaritiesInResults\NumbersAndRepeats.cs" />
     <Compile Include="Results.xaml.cs">
       <DependentUpon>Results.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TopSimilaritiesInResults\SimilarityHolder.cs" />
-    <Compile Include="TopSimilaritiesInResults\SimilarityHolderViewModel.cs" />
-    <Compile Include="NumberColumns\SpecificNumberAndRepeat.cs" />
-    <Compile Include="NumberColumns\SpecificNumberList.cs" />
     <Compile Include="TopSimilarities.xaml.cs">
       <DependentUpon>TopSimilarities.xaml</DependentUpon>
     </Compile>
     <Compile Include="TopSimilaritiesList.xaml.cs">
       <DependentUpon>TopSimilaritiesList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModelBase.cs" />
-    <Compile Include="VikingLottoNumbers.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -243,10 +217,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Lotto serch icon 96dpi %28Grey%29.png" />
+    <ProjectReference Include="..\LotteryCore\LotteryCore.csproj">
+      <Project>{36327911-395a-4229-919b-266196d38d8a}</Project>
+      <Name>LotteryCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Close Icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Lotto serch icon 96dpi %28Green%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Lotto serch icon 96dpi %28Grey%29.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Lotto serch icon Button Down.png" />
@@ -255,10 +244,351 @@
     <Resource Include="Images\Match Icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\No\1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\19.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\27.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\28.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\33.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\34.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\35.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\37.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\38.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\39.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\41.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\42.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\43.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\44.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\45.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\46.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\47.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\9.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Images\Patterns Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Close Icon.png" />
+    <Resource Include="Images\W_No\w1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w19.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w27.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w28.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w33.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w34.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w35.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w37.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w38.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w39.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w41.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w42.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w43.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w44.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w45.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w46.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w47.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\W_No\w9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\No\49.png" />
+    <Resource Include="Images\No\50.png" />
+    <Resource Include="Images\No\51.png" />
+    <Resource Include="Images\No\52.png" />
+    <Resource Include="Images\No\53.png" />
+    <Resource Include="Images\No\54.png" />
+    <Resource Include="Images\No\55.png" />
+    <Resource Include="Images\No\56.png" />
+    <Resource Include="Images\No\57.png" />
+    <Resource Include="Images\No\58.png" />
+    <Resource Include="Images\No\59.png" />
+    <Resource Include="Images\No\60.png" />
+    <Resource Include="Images\No\61.png" />
+    <Resource Include="Images\No\62.png" />
+    <Resource Include="Images\No\63.png" />
+    <Resource Include="Images\No\64.png" />
+    <Resource Include="Images\No\65.png" />
+    <Resource Include="Images\No\66.png" />
+    <Resource Include="Images\No\67.png" />
+    <Resource Include="Images\No\68.png" />
+    <Resource Include="Images\No\69.png" />
+    <Resource Include="Images\No\70.png" />
+    <Resource Include="Images\No\71.png" />
+    <Resource Include="Images\No\72.png" />
+    <Resource Include="Images\No\73.png" />
+    <Resource Include="Images\No\74.png" />
+    <Resource Include="Images\No\75.png" />
+    <Resource Include="Images\No\76.png" />
+    <Resource Include="Images\No\77.png" />
+    <Resource Include="Images\No\78.png" />
+    <Resource Include="Images\No\79.png" />
+    <Resource Include="Images\No\80.png" />
+    <Resource Include="Images\No\81.png" />
+    <Resource Include="Images\No\82.png" />
+    <Resource Include="Images\No\83.png" />
+    <Resource Include="Images\No\84.png" />
+    <Resource Include="Images\No\85.png" />
+    <Resource Include="Images\No\86.png" />
+    <Resource Include="Images\No\87.png" />
+    <Resource Include="Images\No\88.png" />
+    <Resource Include="Images\No\89.png" />
+    <Resource Include="Images\No\90.png" />
+    <Resource Include="Images\No\91.png" />
+    <Resource Include="Images\No\92.png" />
+    <Resource Include="Images\No\93.png" />
+    <Resource Include="Images\No\94.png" />
+    <Resource Include="Images\No\95.png" />
+    <Resource Include="Images\No\96.png" />
+    <Resource Include="Images\No\97.png" />
+    <Resource Include="Images\No\98.png" />
+    <Resource Include="Images\No\99.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Spin Icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

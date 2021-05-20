@@ -198,9 +198,8 @@
             <Trigger Property="Orientation" Value="Horizontal">
                 <Setter Property="Width" Value="Auto"/>
                 <Setter Property="MinWidth" Value="0"/>
-                <Setter Property="Height" Value="30"/>
+                <Setter Property="Height" Value="20"/>
                 <Setter Property="MinHeight" Value="{Binding Height, RelativeSource={RelativeSource Self}}"/>
-                <Setter Property="Margin" Value="0 0 0 20"/>
 
                 <Setter Property="Template">
                     <Setter.Value>
@@ -246,24 +245,43 @@
         </DoubleAnimationUsingKeyFrames>
     </Storyboard>
 
-   
-    <!--<Style x:Key="SideButtonTriggers" TargetType="Button">
-        <Style.Triggers>
-            <EventTrigger RoutedEvent="UIElement.MouseEnter">
-                <BeginStoryboard x:Name="AnimatedTopSimilarities_BeginStoryboard1" Storyboard="{StaticResource AnimatedTopSimilarities}"/>
-            </EventTrigger>
-            --><!--<EventTrigger RoutedEvent="UIElement.MouseLeave" >
-                <BeginStoryboard Storyboard="{StaticResource AnimationTopSimilaritiesOff}"/>
-            </EventTrigger>-->
 
-            <!--<EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="numbersChart">
-                <BeginStoryboard Storyboard="{StaticResource AnimatedNumbersChartOn}"/>
-            </EventTrigger>
-            <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="numbersChart">
-                <BeginStoryboard Storyboard="{StaticResource AnimatedNumbersChartOff}"/>
-            </EventTrigger>--><!--
-        </Style.Triggers>
-    </Style>-->
-               
-
+    <Style x:Key="LvItemStyle" TargetType="ListViewItem">
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <Border x:Name="border" Background="Transparent">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Disabled" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="SelectionStates">
+                                <VisualState x:Name="Unselected" />
+                                <VisualState x:Name="Selected">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="border"
+                                                              Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="0" Value="LightBlue" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="SelectedUnfocused">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="border"
+                                                              Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="0" Value="SkyBlue" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
 </ResourceDictionary>

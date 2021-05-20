@@ -1,0 +1,958 @@
+﻿<UserControl x:Class="LotteryNumCheck.NumberPatternsVisual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LotteryNumCheck"
+             xmlns:local1="clr-namespace:LotteryNumCheck.AttachedProperties"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid Background="#FF1A2936">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="67"/>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Number"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="14"
+                   Foreground="White"/>
+
+            <Label Grid.Column="1"
+                   Content="Average"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="14"
+                   Foreground="White"/>
+
+            <Label Grid.Column="2"
+                   Content="All Number Patterns"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="14"
+                   Foreground="White"/>
+
+        </Grid>
+
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="48"/>
+            </Grid.ColumnDefinitions>
+
+            <ScrollViewer Grid.Row="1"
+                          local1:ScrollViewerProperties.MonitorScroll="true"
+                          ScrollViewer.CanContentScroll="True"
+                          ScrollViewer.VerticalScrollBarVisibility="Visible"
+                          ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                          Background="Transparent"
+                          Padding="10 10 0 0"
+                      >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="145"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ScrollViewer>
+                        <ItemsControl ItemsSource="{Binding NumberAndAverageTitle}" >
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <local:NumberPatternNoAndAverage Height="39"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+
+                    <StackPanel Grid.Column="1">
+                    <ListView ItemsSource="{Binding NumList1}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList2}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList3}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList4}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList5}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList6}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList7}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList8}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList9}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList10}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList11}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList12}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList13}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList14}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList15}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList16}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList17}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList18}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList19}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList20}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList21}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList22}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList23}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList24}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList25}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList26}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList27}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList28}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList29}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList30}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList31}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList32}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList33}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList34}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList35}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList36}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList37}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList38}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList39}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList40}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList41}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList42}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList43}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList44}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList45}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList46}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList47}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+                    <ListView ItemsSource="{Binding NumList48}"
+                              BorderBrush="Transparent"
+                              Background="#FF2A4146"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"
+                  >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:NumberPatternsItem Height="35" Width="35"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                    </ListView>
+
+                </StackPanel>
+                </Grid>
+
+            </ScrollViewer>
+
+        </Grid>
+        
+    </Grid>
+</UserControl>

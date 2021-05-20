@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LotteryNumCheck"
+        xmlns:local="clr-namespace:LotteryCore;assembly=LotteryCore"
+        xmlns:localNumCheck="clr-namespace:LotteryNumCheck"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="Lotto Statistic"
@@ -17,6 +18,12 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <Storyboard x:Key="Spin">
+                <DoubleAnimation
+                                 Storyboard.TargetProperty="RenderTransform.Angle"
+                                 From="0" To="360" Duration="0:0:1" RepeatBehavior="Forever"/>
+            </Storyboard>
 
             <Storyboard x:Key="AnimatedTopSimilarities">
                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="topSimilaritiesList">
@@ -60,15 +67,15 @@
                                  BeginTime="0:0:5"/>
             </Storyboard>
 
-            <Storyboard x:Key="AnimatedCloasePopup">
-                <DoubleAnimation Storyboard.TargetName="CloaseBuble"
+            <Storyboard x:Key="AnimatedClosePopup">
+                <DoubleAnimation Storyboard.TargetName="CloseBuble"
                                  Storyboard.TargetProperty="Opacity"
                                  From="0" To="0" Duration="0:0:0.5"/>
-                <DoubleAnimation Storyboard.TargetName="CloaseBuble"
+                <DoubleAnimation Storyboard.TargetName="CloseBuble"
                                  Storyboard.TargetProperty="Opacity"
                                  From="0" To="1" Duration="0:0:0.5"
                                  BeginTime="0:0:0.5"/>
-                <DoubleAnimation Storyboard.TargetName="CloaseBuble"
+                <DoubleAnimation Storyboard.TargetName="CloseBuble"
                                  Storyboard.TargetProperty="Opacity"
                                  From="1" To="0" Duration="0:0:0.5"
                                  BeginTime="0:0:5"/>
@@ -101,6 +108,43 @@
                                  From="1" To="0" Duration="0:0:0.5"
                                  BeginTime="0:0:5"/>
             </Storyboard>
+            <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+                <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+                <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsDefaulted" Value="true">
+                                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <!--<Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>-->
+                                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="true">
+                                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                    <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
 
             <!--#endregion-->
@@ -112,7 +156,7 @@
         <EventTrigger RoutedEvent="Button.Click" SourceName="topSimilarities">
             <BeginStoryboard x:Name="AnimatedTopSimilarities_BeginStoryboard" Storyboard="{StaticResource AnimatedTopSimilarities}"/>
         </EventTrigger>
-        <EventTrigger RoutedEvent="Button.Click" SourceName="topSimilaritiesCloase">
+        <EventTrigger RoutedEvent="Button.Click" SourceName="topSimilaritiesClose">
             <BeginStoryboard x:Name="AnimatedTopSimilarities_BeginStoryboard1" Storyboard="{StaticResource AnimationTopSimilaritiesOff}"/>
         </EventTrigger>
 
@@ -128,8 +172,8 @@
             <BeginStoryboard Storyboard="{StaticResource AnimatedMinimizePopup}"/>
         </EventTrigger>
 
-        <EventTrigger RoutedEvent="MouseEnter" SourceName="Cloase">
-            <BeginStoryboard Storyboard="{StaticResource AnimatedCloasePopup}"/>
+        <EventTrigger RoutedEvent="MouseEnter" SourceName="Close">
+            <BeginStoryboard Storyboard="{StaticResource AnimatedClosePopup}"/>
         </EventTrigger>
 
         <EventTrigger RoutedEvent="MouseEnter" SourceName="topSimilarities">
@@ -196,19 +240,19 @@
                 </i:Interaction.Triggers>
             </Button>
 
-            <Button x:Name="Cloase" Grid.Column="2" Content="✘" Background="Transparent" BorderThickness="0" Foreground="#FFA61D1D" FontSize="25" Width="40" Height="40" Click="Button_Click">
+            <Button x:Name="Close" Grid.Column="2" Content="✘" Background="Transparent" BorderThickness="0" Foreground="#FFA61D1D" FontSize="25" Width="40" Height="40" Click="Button_Click">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseEnter">
-                        <i:InvokeCommandAction Command="{Binding HoverOnCloase}"/>
+                        <i:InvokeCommandAction Command="{Binding HoverOnClose}"/>
                     </i:EventTrigger>
                     <i:EventTrigger EventName="MouseLeave">
-                        <i:InvokeCommandAction Command="{Binding HoverOfCloase}"/>
+                        <i:InvokeCommandAction Command="{Binding HoverOfClose}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
         </Grid>
 
-        <Border Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="2" Background="#FF466885" Margin="0,0,0.4,0"/>
+        <Border Grid.ColumnSpan="1" Grid.Row="1" Grid.RowSpan="2" Background="#FF3F5D76" Margin="0,0,0.4,0"/>
 
         <Grid Grid.Row="1" Grid.RowSpan="2" Margin="0,0,0.4,0">
             <Grid.ColumnDefinitions>
@@ -369,7 +413,7 @@ Find a match with your number
                    Foreground="Black" 
                    FontWeight="Black"
                    BorderThickness="0"
-                   Background="#FF466885"
+                   Background="#FF3F5D76"
                    Text="+"/>
 
             <Border Grid.Column="8"
@@ -477,7 +521,7 @@ Find a match with your number
                 <ItemsControl ItemsSource="{Binding MatchResults}" >
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <local:Results Padding="0 10 0 0"/>
+                            <localNumCheck:Results Padding="0 10 0 0"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -486,14 +530,14 @@ Find a match with your number
 
         </Grid>
 
-        <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF5781A6"/>
-        <Border Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF5781A6"/>
-        <Border Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF5781A6"/>
-        <Border Grid.Column="4" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF5781A6"/>
-        <Border Grid.Column="5" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF5781A6"/>
-        <Border Grid.Column="6" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF5781A6"/>
-        <Border Grid.Column="7" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF5781A6"/>
-        <Border Grid.Column="9" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FFD8E6F3" Grid.ColumnSpan="1"/>
+        <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF517799"/>
+        <Border Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF517799"/>
+        <Border Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF517799"/>
+        <Border Grid.Column="4" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF517799"/>
+        <Border Grid.Column="5" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF517799"/>
+        <Border Grid.Column="6" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF517799"/>
+        <Border Grid.Column="7" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF517799"/>
+        <Border Grid.Column="9" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FFC3D0DC" Grid.ColumnSpan="1"/>
         <!--<Border Grid.Column="8" Grid.Row="1" Grid.RowSpan="2" BorderThickness="2 0 0 0" BorderBrush="#FF1D4859" Background="#FF385772" Grid.ColumnSpan="3" Margin="336.6,0,0,0"/>-->
 
 
@@ -659,36 +703,6 @@ Find a match with your number
                FontSize="30"
                FontWeight="Bold"
                Foreground="#FF3333F3" Margin="91.6,45,91.2,45"/>
-
-        <!--<Label Grid.Column="9" Grid.Row="1"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               Content="Top Matches"
-               FontSize="30"
-               FontWeight="Bold"
-               Foreground="WhiteSmoke" Grid.ColumnSpan="2" Margin="0.8,45,1,45"/>-->
-
-        <!--<Label Grid.Row="2"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               Content="{Binding WrongInputMessageText}"
-               FontSize="30"
-               Foreground="White"
-               Visibility="{Binding WrongInputMessage}" />
-
-        <ScrollViewer Margin="0 30 0 0"
-                      Grid.Row="2"
-                      Width="350"
-                      VerticalScrollBarVisibility="Auto">
-            <ItemsControl ItemsSource="{Binding MatchResults}" >
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <local:Results Padding="0 10 0 0"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>-->
-
         <ScrollViewer Grid.Row="2" Grid.Column="1"
                       ToolTip="Moust frekuently drawn numbers"
                       CanContentScroll="True"
@@ -696,7 +710,7 @@ Find a match with your number
             <ItemsControl ItemsSource="{Binding Num1List}" >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:Num1ResultList Padding="0 10 0 0"/>
+                        <localNumCheck:Num1ResultList Padding="0 10 0 0"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -709,7 +723,7 @@ Find a match with your number
             <ItemsControl ItemsSource="{Binding Num2List}" >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:Num2ResultList Padding="0 10 0 0"/>
+                        <localNumCheck:Num2ResultList Padding="0 10 0 0"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -721,7 +735,7 @@ Find a match with your number
             <ItemsControl ItemsSource="{Binding Num3List}" >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:Num3ResultList Padding="0 10 0 0"/>
+                        <localNumCheck:Num3ResultList Padding="0 10 0 0"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -733,7 +747,7 @@ Find a match with your number
             <ItemsControl ItemsSource="{Binding Num4List}" >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:Num4ResultList Padding="0 10 0 0"/>
+                        <localNumCheck:Num4ResultList Padding="0 10 0 0"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -745,7 +759,7 @@ Find a match with your number
             <ItemsControl ItemsSource="{Binding Num5List}" >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:Num5ResultList Padding="0 10 0 0"/>
+                        <localNumCheck:Num5ResultList Padding="0 10 0 0"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -757,7 +771,7 @@ Find a match with your number
             <ItemsControl ItemsSource="{Binding Num6List}" >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:Num6ResultList Padding="0 10 0 0"/>
+                        <localNumCheck:Num6ResultList Padding="0 10 0 0"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -769,7 +783,7 @@ Find a match with your number
             <ItemsControl ItemsSource="{Binding AdditionalNumList}" >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:AdditionalNumResultList Padding="0 10 0 0"/>
+                        <localNumCheck:AdditionalNumResultList Padding="0 10 0 0"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -777,11 +791,13 @@ Find a match with your number
 
         <ScrollViewer Grid.Row="2" Grid.Column="8"
                       CanContentScroll="True"
-                      VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top">
             <ItemsControl ItemsSource="{Binding WinResultList}" >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:AllResultList Padding="7 7 0 0"/>
+                        <localNumCheck:AllResultList Padding="7 7 0 0"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -821,16 +837,16 @@ Find a match with your number
                         Grid.ColumnSpan="2"
                         Width="100"
                         HorizontalAlignment="Right">
-                
-                <Button x:Name="topSimilaritiesCloase"
+
+                <Button x:Name="topSimilaritiesClose"
                         Width="50" Height="70"
                         Background="White" 
                         Foreground="#FFC50F0F"
                         FontWeight="Bold"
                         FontSize="25" 
                         HorizontalAlignment="Right"
-                        Visibility="{Binding TopSimilaritiesCloaseVisibility}"
-                        Command="{Binding TopSimilaritiesCloase}">
+                        Visibility="{Binding TopSimilaritiesCloseVisibility}"
+                        Command="{Binding TopSimilaritiesClose}">
 
                     <Border Width="45" Height="70">
                         <Border.Background>
@@ -846,8 +862,8 @@ Find a match with your number
                         FontWeight="Bold"
                         FontSize="25"
                         HorizontalAlignment="Right"
-                        Visibility="{Binding NumberPatternsCloaseVisibility}"
-                        Command="{Binding NumberPatternsCloase}">
+                        Visibility="{Binding NumberPatternsCloseVisibility}"
+                        Command="{Binding NumberPatternsClose}">
 
                     <Border Width="45" Height="70">
                         <Border.Background>
@@ -874,14 +890,15 @@ Find a match with your number
                         FontSize="25" 
                         HorizontalAlignment="Right"
                         Visibility="{Binding TopSimilaritiesVisibility}"
-                        Command="{Binding TopSimilaritiesOpen}">
+                        Command="{Binding TopSimilaritiesOpen}"
+                        Style="{DynamicResource ButtonStyle1}">
 
                     <Border Width="45" Height="45">
                         <Border.Background>
                             <ImageBrush ImageSource="Images\Match Icon.png"/>
                         </Border.Background>
                     </Border>
-                    
+
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseEnter">
                             <i:InvokeCommandAction Command="{Binding HoverOnTopSimilatities}"/>
@@ -890,6 +907,35 @@ Find a match with your number
                             <i:InvokeCommandAction Command="{Binding HoverOfTopSimilatities}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
+
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                            <BeginStoryboard>
+                                <BeginStoryboard.Storyboard>
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0:0:0.5"
+                                                        From="WhiteSmoke"
+                                                        To="#FF5FBB80"
+                                                        Storyboard.TargetProperty="Background.Color"/>
+
+                                    </Storyboard>
+                                </BeginStoryboard.Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                            <BeginStoryboard>
+                                <BeginStoryboard.Storyboard>
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0:0:0.5"
+                                                        From="#FF5FBB80"
+                                                        To="WhiteSmoke"
+                                                        Storyboard.TargetProperty="Background.Color"/>
+
+                                    </Storyboard>
+                                </BeginStoryboard.Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
 
                 </Button>
 
@@ -901,14 +947,45 @@ Find a match with your number
                         FontWeight="Bold"
                         FontSize="25"
                         HorizontalAlignment="Right"
+                        IsEnabled="{Binding PatternButtonIsEnabled}"
                         Visibility="{Binding NumberPatternsVisibility}"
-                        Command="{Binding NumberPatternsOpen}" >
+                        Command="{Binding NumberPatternsOpen}"
+                        Style="{StaticResource ButtonStyle1}">
 
-                    <Border Width="40" Height="40">
-                        <Border.Background>
-                            <ImageBrush ImageSource="Images\Patterns Icon.png"/>
-                        </Border.Background>
-                    </Border>
+                    <Grid>
+                        <ProgressBar Height="60" Width="60"
+                                     Value="{Binding PatternProgress}"
+                                     Visibility="{Binding PatternProgressVisibility}">
+                            
+                        </ProgressBar>
+
+                        <Border IsEnabled="{Binding IsBusy}" Width="40" Height="40" RenderTransformOrigin="0.5,0.5">
+                            <Border.Background>
+                            
+                            <ImageBrush ImageSource="{Binding PatternsIcon}"/>
+                            </Border.Background>
+
+                            <Border.RenderTransform>
+                                <RotateTransform CenterX="0" CenterY="0" Angle="0" />
+                            </Border.RenderTransform>
+
+                            <Border.Style>
+                                <Style>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsBusy}" Value="True">
+                                            <DataTrigger.EnterActions>
+                                                <BeginStoryboard x:Name="spin" Storyboard="{StaticResource Spin}"/>
+                                            </DataTrigger.EnterActions>
+                                             <DataTrigger.ExitActions>
+                                                <StopStoryboard BeginStoryboardName="spin"/>
+                                            </DataTrigger.ExitActions>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </Grid>
+                    
 
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseEnter">
@@ -919,13 +996,42 @@ Find a match with your number
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
 
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                            <BeginStoryboard>
+                                <BeginStoryboard.Storyboard>
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0:0:0.5"
+                                                        From="WhiteSmoke"
+                                                        To="#FF5FBB80"
+                                                        Storyboard.TargetProperty="Background.Color"/>
+
+                                    </Storyboard>
+                                </BeginStoryboard.Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                            <BeginStoryboard>
+                                <BeginStoryboard.Storyboard>
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0:0:0.5"
+                                                        From="#FF5FBB80"
+                                                        To="WhiteSmoke"
+                                                        Storyboard.TargetProperty="Background.Color"/>
+
+                                    </Storyboard>
+                                </BeginStoryboard.Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+
 
                 </Button>
             </StackPanel>
 
 
 
-            <local:PopupBubble x:Name="MinimizeBuble"
+            <localNumCheck:PopupBubble x:Name="MinimizeBuble"
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
                                MaxWidth="80"
@@ -938,9 +1044,9 @@ Find a match with your number
                                HorizontalAlignment="Right"
                                Visibility="{Binding MinimizePopupBuble}">
 
-            </local:PopupBubble>
+            </localNumCheck:PopupBubble>
 
-            <local:PopupBubble x:Name="CloaseBuble"
+            <localNumCheck:PopupBubble x:Name="CloseBuble"
                                Grid.Column="1"
                                Opacity="0.8"
                                Height="50"
@@ -949,11 +1055,11 @@ Find a match with your number
                                Panel.ZIndex="1"
                                HorizontalAlignment="Right"
                                VerticalAlignment="Top"
-                               Visibility="{Binding CloasePopupBuble}">
+                               Visibility="{Binding ClosePopupBuble}">
 
-            </local:PopupBubble>
+            </localNumCheck:PopupBubble>
 
-            <local:PopupBubble x:Name="TopSimilaritiesPopupBuble"
+            <localNumCheck:PopupBubble x:Name="TopSimilaritiesPopupBuble"
                                Grid.Column="1"
                                Opacity="0.8"
                                Height="50"
@@ -964,9 +1070,9 @@ Find a match with your number
                                HorizontalAlignment="Right"
                                Visibility="{Binding TopSimilaritiesPopupBuble}">
 
-            </local:PopupBubble>
+            </localNumCheck:PopupBubble>
 
-            <local:PopupBubble x:Name="DrawSequenceVisualPopupBuble"
+            <localNumCheck:PopupBubble x:Name="DrawSequenceVisualPopupBuble"
                                Grid.Row="1"
                                Grid.ColumnSpan="2"
                                Opacity="0.8"
@@ -978,42 +1084,42 @@ Find a match with your number
                                HorizontalAlignment="Right"
                                Visibility="{Binding DrawSequenceVisualPopupBuble}">
 
-            </local:PopupBubble>
+            </localNumCheck:PopupBubble>
 
 
         </Grid>
-        
-       
-        <local:TopSimilarities x:Name="topSimilaritiesList" 
+
+
+        <localNumCheck:TopSimilarities x:Name="topSimilaritiesList" 
                                Grid.Row="1"
                                Grid.Column="8"
                                Grid.ColumnSpan="1"
                                Grid.RowSpan="2" 
                                >
-            <local:TopSimilarities.RenderTransform>
+            <localNumCheck:TopSimilarities.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
                     <RotateTransform/>
                     <TranslateTransform X="1000"/>
                 </TransformGroup>
-            </local:TopSimilarities.RenderTransform>
+            </localNumCheck:TopSimilarities.RenderTransform>
 
-        </local:TopSimilarities>
+        </localNumCheck:TopSimilarities>
 
-        <local:DrawSequenceVisual x:Name="numbersChart"
+        <localNumCheck:NumberPatternsVisual x:Name="numbersChart"
                      Grid.Row="1"
                      Grid.ColumnSpan="9"
                      Grid.RowSpan="2"
                      >
-            <local:DrawSequenceVisual.RenderTransform>
+            <localNumCheck:NumberPatternsVisual.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
                     <RotateTransform/>
                     <TranslateTransform X="2000"/>
                 </TransformGroup>
-            </local:DrawSequenceVisual.RenderTransform>
-        </local:DrawSequenceVisual>
+            </localNumCheck:NumberPatternsVisual.RenderTransform>
+        </localNumCheck:NumberPatternsVisual>
     </Grid>
 </Window>

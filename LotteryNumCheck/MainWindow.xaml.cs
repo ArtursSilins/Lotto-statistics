@@ -25,9 +25,6 @@ namespace LotteryNumCheck
         public MainWindow()
         {
             InitializeComponent();
-
-            DataContext = new LotteryViewModel();
-
         }
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

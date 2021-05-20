@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:LotteryNumCheck"
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="405">
-    <Grid Background="#FF385772" Opacity="0.97" >
+    <Grid Background="#FF385772">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
